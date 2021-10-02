@@ -1,0 +1,472 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+*::-webkit-scrollbar{
+    display: none;
+}
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.inputSearch{
+    width: 60%;
+    padding: 2.5px 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+}
+.headerContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
+}
+.toolbar{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-around;
+}
+.usertoolbar{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-around;
+}
+.logoimage{
+    width: 15%;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+.homePageContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+.FFcard{
+    width: 90%;
+    box-shadow: 2px 2px 5px #7a7a7a;
+    background-color: #e7e7e7;
+    height: 75vh;
+    border-radius: 20px;
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    /* padding-bottom: 100px; */
+}
+.FFdata{
+    width: fit-content;
+    border-radius: 0 30px 30px 0;
+    background: #000000b7;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+.NewsTag{
+    width: 100%;
+    background: #000000b7;
+    margin-bottom: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+.dots{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    margin-bottom: 20px;
+}
+.FeedContainer{
+    width: 100%;
+    background: #eeeded;
+    box-sizing: border-box;
+    box-shadow: -2px -2px 20px #b8b8b8;
+    padding: 20px 25px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+.postsContainer{
+    margin: 0 10px; 
+    width: 53%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.asideContainer{
+    margin: 0 10px; 
+    width: 30%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addCommentdiv{
+    width: 45%;
+    /* max-height: 40vh; */
+    background: #fff;
+    padding: 15px 35px;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.commentCard{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    margin: 10px 0;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.commentsContainer{
+    width: 100%;
+    height: 25vh;
+    max-height: 25vh;
+    overflow-y: auto;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.footerContents{
+    width: 70%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.FooterContainer{
+    z-index: 1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #7a7a7a;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+.sponsorsFooterDiv{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+.sponsorsCardsContainer{
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start
+}
+.footerLogo{
+    width: 15%;
+    border-radius: 10px;
+}
+.FoundCard{
+    width: 100%;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #b8b8b8;
+}
+.FCardContent{
+    width: 80%;
+    max-width: 80%;
+    overflow-y: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.searchDiv{
+    width: 30vw;
+    max-height: 45vh;
+    overflow: auto; 
+    background: #fff;
+    box-shadow: 2px 2px 5px #00000078; 
+    padding: 10px; 
+    border-radius: 10px;
+}
+.searchDiv::-webkit-scrollbar{
+    display: block;
+    border-radius: 0 10px 10px 0;
+    opacity: 1;
+    background: #e7e7e7
+}
+.searchDiv::-webkit-scrollbar-thumb{
+    display: block;
+    width: 5px;
+    opacity: 1;
+    border-radius: 10px;
+    background: #C93832
+}
+.seeMoreDiv{
+    background: #7a7a7a7a;
+    width: fit-content;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 100px;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+
+
+
+/* Audio */
+
+.audioContainer{
+    background: #C93832;
+    width: 20%;
+    padding: 10px;
+    position: fixed;
+    right: 0;
+    border-radius: 10px;
+    bottom: 0;
+    margin: 30px;
+    z-index: 1;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 2px 2px 5px #00000078;
+}
+.volumecontrol{
+    background: #fff;
+    width: fit-content;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0 0 10px #00000078;
+    padding-top: 20px;
+}
+.Tags{
+    width: 80%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.spinner {
+    width: 25px;
+    height: 25px;
+  
+    position: relative;
+    margin: 0px;
+  }
+  
+  .double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+  
+  .double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+  
+  @-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bounce {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+
+
+/* Animations */
+
+.Content-load-appear{
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.Content-load-appear.Content-load-appear-active{
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1000ms ease;
+}
+
+.Post-Load-enter{
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.Post-Load-enter-active{
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1000ms ease;
+}
+.Post-Load-exit{
+    opacity: 1;
+    transform: scaleY(1) translateY(0px);
+}
+
+.Post-Load-exit-active{
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 1000ms ease;
+}
+
+
+.Chat-Load-enter{
+    opacity: 0;
+    transform: scale(0);
+}
+
+.Chat-Load-enter-active{
+    opacity: 1;
+    transform: scale(1);
+    transition: all 1000ms ease;
+}
+.Chat-Load-exit{
+    opacity: 1;
+    transform: scaleY(1) translateY(0px);
+}
+
+.Chat-Load-exit-active{
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 1000ms ease;
+}
+
+.Audio-Comp-appear{
+    opacity: 0;
+    transform: translateX(1000px);
+}
+
+.Audio-Comp-appear.Audio-Comp-appear-active{
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 1000ms ease;
+}
+.footerList{
+    width: 50%;
+}
+
+
+@media screen and (max-width: 600px) {
+    .addCommentdiv{
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .toolbar{
+        width: 50%;
+        justify-content: flex-start;
+        padding: 10px;
+    }
+    .usertoolbar{
+        width: 50%;
+    }
+    .logoimage{
+        width: 40%;
+    }
+    .searchDiv{
+        width: 90%;
+    }
+    .footerLogo{
+        width: 20%;
+    }
+    .footerContents{
+        width: 100%;
+        flex-flow: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .footerList{
+        width: 100%;
+    }
+    .footerText{
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .audioContainer{
+        width: 100%;
+        margin: 0;
+        border-radius: 10px 10px 0 0;
+        right: inherit;
+        box-sizing: border-box;
+    }
+    .FFdata{
+        margin-bottom: 0;
+        border-radius: 10px 10px 0 0;
+    }
+    .FFdata img{
+        width: 10%;
+    }
+    .NewsTag{
+        border-radius: 0 0 10px 10px;
+    }
+    .FeedContainer{
+        margin-top: 20px;
+        padding: 20px 5px;
+        flex-flow: row wrap-reverse;
+    }
+    .FooterContainer{
+        padding-bottom: 15vh;
+    }
+    .postsContainer{
+        width: 100%;
+    }
+    .asideContainer{
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #b8b8b8;
+    }
+}

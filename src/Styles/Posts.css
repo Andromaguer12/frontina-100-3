@@ -1,0 +1,83 @@
+.postDiv{
+    width: 100%;
+    margin: 20px 0;
+    z-index: 1;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px  solid #cacaca;
+    box-sizing: border-box;
+    /* box-shadow: 2px 2px 5px #00000036; */
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.postHeader{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.userPostImg{
+    width: 7.5%;
+    background: red;
+    margin: 0 10px; 
+    border-radius: 50%; 
+}
+.postImage{
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 2px 0;
+}
+.postActions{
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.PostAside{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.SearchNew{
+    border-radius: 10px;
+    background: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px #00000036;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.FFcardResponsive{
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.responsiveFFImage{
+    width: 100%;
+}
+
+@media screen and (max-width: 600px){
+    .userPostImg{
+        width: 20%;
+    }
+}

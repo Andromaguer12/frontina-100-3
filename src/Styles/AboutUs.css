@@ -1,0 +1,87 @@
+.containerA{
+    width: "100%";
+    height: "100vh";
+    background-size: "cover";
+}
+.InfoDivA{
+    width: 85%;
+    height: 60vh;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: #00000078;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.infoList{
+    width: 25%;
+    height: 100%;
+    padding: 10px 0;
+    border-right: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.infoContainer{
+    width: 75%;
+    overflow-y: auto;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.StaffInfoList {
+    width: 50%;
+    height: 100%;
+    padding: 10px 0;
+    border-right: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.StaffInfoContainer{
+    width: 50%;
+    overflow-y: auto;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+.StaffInfoContainer::-webkit-scrollbar{
+    display: block;
+    border-radius: 10px;
+    opacity: 1;
+    background: #e7e7e7
+}
+.StaffInfoContainer::-webkit-scrollbar-thumb{
+    display: block;
+    width: 5px;
+    opacity: 1;
+    border-radius: 10px;
+    background: #C93832
+}
+
+@media screen and (max-width: 600px) {
+    .InfoDivA{
+        flex-flow: column;
+        width: 100%;
+        height: 70vh;
+    }
+    .StaffInfoList{
+        width: 100%;
+    }
+    .StaffInfoContainer{
+        width: 100%;
+    }
+}

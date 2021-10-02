@@ -1,0 +1,147 @@
+.admindashcontent{
+    display: flex;
+    flex-flow: row;
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+    width: 100%;
+    height: 100vh;
+}
+.drawerHeader{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.layoutdisplay{
+    width: 90%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.dashboardHeader{
+    width: 100%;
+    /* height: 30vh; */
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.dashboardHeaderimg{
+    width: 15%;
+    box-sizing: border-box;
+}
+.controlpanel{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 0;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 -2px 20px #b8b8b8;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.programmingtable{
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+.programmingtable tr{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #b8b8b8;
+}
+.programmingtable td{
+    padding: 10px 15px;
+    text-align: center;
+    width: 12.5%;
+    max-width: 12.5%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
+.addShadow{
+    overflow-y: auto;
+    padding: 20px 0;
+    width: 100vw;
+    height: 100vh;
+    background: #00000078;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.divAddRow{
+    margin: 20px 0;
+    width: 45%;
+    background: #fff;
+    padding: 15px 35px;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sponsorsDiv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.SponsorCard{
+    max-width: 30%;
+    width: 30%;
+    height: 30vh;
+    border-radius: 10px;
+    background: #e7e7e7;
+    max-height: 30vh;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.pagesCountContainer{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.pageCountCard{
+    background: #e7e7e7;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.selectTime{
+    width: 20vw;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px #00000078;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-between;
+}
