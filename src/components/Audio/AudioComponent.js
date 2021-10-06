@@ -1,11 +1,14 @@
 import { CircularProgress, Fab, IconButton, Popper, Typography } from '@material-ui/core'
 import { PlayArrow, Clear, PauseOutlined, Radio, VolumeUp } from '@material-ui/icons'
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { rdb } from '../../services/firebase';
+import db, { rdb } from '../../services/firebase';
 import VolumeComponent from './VolumeComponent';
+import audio1 from  "../../Images/audio1.mp3"
+import {findDateValue, getDateFromTimestamp, WeekDay} from "../../functions/utils" 
 
 function AudioComponent({StreamID}) {
-    const [Loading, setLoading] = useState(true);
+    const [Loading, setLoading] = useState(false)
+    const [Programming, setProgramming] = useState([])
     const [Pause, setPause] = useState(false);
     const [Playing, setPlaying] = useState(false);
     const [Error, setError] = useState(false);
@@ -16,20 +19,49 @@ function AudioComponent({StreamID}) {
     const open = Boolean(anchorEl);
     const streamRef = rdb.ref().child('/streamID');
     const audio = document.querySelector("#audioplayer");
+    const [Program, setProgram] = useState(null)
 
     useEffect(() => {
-        if(!Loading){
+        if(audio){
             audio.volume = Volume/100;
         }
     }, [Volume])
 
+    useEffect(() => {
+        db.collection("Programacion").get().then((state) => {
+            const docs = [];
+            state.forEach((doc) => docs.push({...doc.data(), id: doc.id}))
+            setProgramming(docs)
+        })
+    }, [])
+
+    useEffect(() => {
+        if(Timer < 40) {
+            setTimeout(() => {
+                Timer++;
+            }, 1000);
+        }
+    }, [Timer]) 
+
+    useEffect(() => {
+        if(!Pause) {
+            const currentTime = new Date().getTime();
+            const timestamp = getDateFromTimestamp(currentTime);
+            if(timestamp.hour.length > 0) {
+                const timeValue = findDateValue(timestamp.hour);
+                const currentProgram = Programming.filter((doc) => {
+                    console.log(WeekDay(doc.streamDay.toLowerCase()))
+                    return timeValue >= doc.time.from.value && timeValue < doc.time.once.value && WeekDay(doc.streamDay.toLowerCase())
+                 })
+                setProgram(currentProgram[0]?.programName)
+            }
+        }
+    })
+
     return (
         <div className="audioContainer">
-            <audio hidden="hidden" id="audioplayer"src={StreamID.id} type="audio/mpeg" onPlaying={() => {setPlaying(true); setError(false)}} onLoadedData={() => setLoading(false)} />
+            <audio hidden="hidden" id="audioplayer" src={StreamID.id} type="audio/mpeg" onPlaying={(e) => {setPlaying(true); }} onPause={() => setPlaying(false)} onError={() => setError(!Error)} onLoad={() => setLoading(true)} onLoadedData={() => setLoading(false)} />
             <Fab onClick={() => {
-                // streamRef.update({
-                //     listeners: StreamID.listeners + 1
-                // })
                 if(!Pause) {
                     audio.play();
                     setPause(true)
@@ -38,17 +70,19 @@ function AudioComponent({StreamID}) {
                     audio.pause();
                     setPause(false)
                 }
-            }} disabled={Loading ? true : false}>
+            }}>
                 {!Pause ? <PlayArrow color="secondary" /> : <PauseOutlined color="secondary" />}
             </Fab>
-            {!Loading && <div className="Tags">
+            <div className="Tags">
                 <div>
-                    <Typography color="primary" style={{ fontSize: "14px", fontWeight: "bold" }}>
-                        {Pause ? `${Playing && !Error ? "Reproduciendo ahora..." : "Buscando Señal..."}` : "Listo para reproducir."}
-                    </Typography>
-                    {Playing && <Typography color="primary" style={{ fontSize: "12px"  }}>
-                        Nombre cancion
+                    {Pause ? <Typography color="primary" style={{ fontSize: "14px", fontWeight: "bold" }}>
+                        {Playing ? "Reproduciendo ahora..." : "Buscando señal..." }
+                    </Typography> : <Typography color="primary" style={{ fontSize: "14px", fontWeight: "bold" }}>
+                        Listo para reproducir.
                     </Typography>}
+                    <Typography color="primary" style={{ fontSize: "12px"  }}>
+                        {Boolean(Program) ? Program : "Programa no registrado" }
+                    </Typography>                    
                 </div>
                 <Popper open={open} style={{ zIndex: "120"}} anchorEl={anchorEl} placement="top">
                     <VolumeComponent changeState={(value) => setVolume(value)} value={Volume} />
@@ -60,14 +94,9 @@ function AudioComponent({StreamID}) {
                     <div class="double-bounce1"></div>
                     <div class="double-bounce2"></div>
                 </div>}
-            </div>}
-            {Loading && Timer < 40 && <Typography variant="h6" color="primary" style={{ width: "80%", display: 'flex', flexFlow: "row", alignItems: "center", justifyContent: "space-around" }}>
-                {Loading && <Radio color="primary" />}
-                Cargando
-                <CircularProgress size={20} style={{ margin: "5px"}} />
-            </Typography>}
+                {Pause && !Playing && <CircularProgress size={20} style={{ margin: "5px"}} />}
+            </div>
             {Timer >= 40 && <Typography color="primary" style={{ width: "80%", display: 'flex', flexFlow: "row", alignItems: "center", justifyContent: "space-around" }}>
-                {/* {Loading && <Radio color="primary" />} */}
                 Error ID Transmision invalido.
                 <Clear color="primary" />
             </Typography>}

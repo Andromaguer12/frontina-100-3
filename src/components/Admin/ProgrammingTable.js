@@ -1,9 +1,10 @@
-import { InputBase, Typography, IconButton, CircularProgress } from '@material-ui/core'
+import { InputBase, Typography, IconButton, CircularProgress, MenuItem, TextField } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import db from '../../services/firebase'
 import { Done, Settings, Delete, Create } from "@material-ui/icons"
 import '../../Styles/AdminDashboard.css'
 import SelectFromOnce from './SelectFromOnce'
+import { days } from './AddProgrammingRow'
 
 const pRef = db.collection("Programacion")
 
@@ -14,6 +15,7 @@ const CustomTr = ({edit, ...props}) => {
     const [loading, setloading] = useState(false)
 
     const handleInputs = (e) => {
+        console.log(e)
         setUpdate({
             ...updateState,
             [e.target.name]: e.target.value
@@ -50,10 +52,12 @@ const CustomTr = ({edit, ...props}) => {
             </td>
             <td>
                 {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>{props.streamDay}</Typography>}
-                {edit && <InputBase color="secondary" name="streamDay"  onChange={handleInputs} variant="outlined" label="Opcion" placeholder={props.streamDay} size="small" />}
+                {edit && <TextField select name="streamDay" size="small" variant="standard" color="secondary" style={{ marginBottom: "10px"}} label="Dia de transmision" defaultValue="lunes" onChange={(e) => handleInputs(e)} fullWidth>
+                    {days.map((day) => <MenuItem value={day}>{day}</MenuItem>)}
+                </TextField>}
             </td>
             <td>
-                {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>De {props.time.from.time} a {props.time.once.time}</Typography>}
+                {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>De {props.time?.from.time} a {props.time?.once.time}</Typography>}
                 {edit && <IconButton color={updateState.time ? "secondary" : ""} onClick={(e) => setanchorEl(open ? null : e.target)}><Create /></IconButton>}
             </td>
             <td>
@@ -96,7 +100,7 @@ export default function ProgrammingTable({editMode, closeEditMode, shadow, hideC
             <tbody>
                 {Programming.length > 0 ? 
                     Programming.sort((prev, next) => {
-                        return prev.time.from.value - next.time.from.value
+                        return prev.time?.from?.value - next.time?.from?.value
                     }).map((td, index) => <CustomTr
                         programName={td.programName} 
                         synopsis={td.synopsis} 

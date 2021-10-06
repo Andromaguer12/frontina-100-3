@@ -54,28 +54,28 @@ export default function FirstFace({data}) {
                         {
                             data.map((card) => {
                                 return <div key={card.id} style={{ width: "100%", display: 'flex', flexFlow: "column", alignItems: "center", justifyContent: "center"}}>
-                                        <div className="FFcardResponsive">
-                                            <div className="FFdata">
-                                                <div className="postHeader">
-                                                    <img src={card.creator.img} className="userPostImg" />
-                                                    <div style={{ display: "flex", flexFlow: "column", alignItems: "flex-start" }}>
-                                                        <Typography style={{ fontSize: "14px", fontWeight: "bold", color: "#e7e7e7" }} >{card.creator.name} | {card.creator.email}</Typography>
-                                                        <div style={{ display: "flex", flexFlow: "row", alignItems: "flex-start" }}>
-                                                            {card.creator.skills.map(skill => <Typography style={{ fontSize: "12.5px", marginRight: "10px", background: "#e7e7e7", borderRadius: "5px", padding: "2px" }}>{skill}</Typography>)}
+                                            <div className="FFcardResponsive">
+                                                <div className="FFdata">
+                                                    <div className="postHeader">
+                                                        <img src={card.creator.img} className="userPostImg" />
+                                                        <div style={{ display: "flex", flexFlow: "column", alignItems: "flex-start" }}>
+                                                            <Typography style={{ fontSize: "14px", fontWeight: "bold", color: "#e7e7e7" }} >{card.creator.name} | {card.creator.email}</Typography>
+                                                            <div style={{ display: "flex", flexFlow: "row", alignItems: "flex-start" }}>
+                                                                {card.creator.skills.map(skill => <Typography style={{ fontSize: "12.5px", marginRight: "10px", background: "#e7e7e7", borderRadius: "5px", padding: "2px" }}>{skill}</Typography>)}
+                                                            </div>
+                                                            <Typography style={{ fontSize: "12.5px", color: "#7a7a7a" }} >{getDateFromTimestamp(card.timestamp).date}|{getDateFromTimestamp(card.timestamp).hour}</Typography>
                                                         </div>
-                                                        <Typography style={{ fontSize: "12.5px", color: "#7a7a7a" }} >{getDateFromTimestamp(card.timestamp).date}|{getDateFromTimestamp(card.timestamp).hour}</Typography>
                                                     </div>
                                                 </div>
+                                                <img src={card.postImg} className="responsiveFFImage" />
+                                                <div className="NewsTag">
+                                                    <Typography variant="h6" color="secondary">{card.title}</Typography>
+                                                    <Typography color="primary">{card.text}</Typography>
+                                                    <Typography style={{ fontSize: "12.5px", width: "fit-content", marginRight: "10px", background: "#e7e7e7", borderRadius: "5px", padding: "2px" }}>{card.contentType}</Typography>
+                                                </div>
                                             </div>
-                                            <img src={card.postImg} className="responsiveFFImage" />
-                                            <div className="NewsTag">
-                                                <Typography variant="h6" color="secondary">{card.title}</Typography>
-                                                <Typography color="primary">{card.text}</Typography>
-                                                <Typography style={{ fontSize: "12.5px", width: "fit-content", marginRight: "10px", background: "#e7e7e7", borderRadius: "5px", padding: "2px" }}>{card.contentType}</Typography>
-                                            </div>
-                                    </div>
-                                </div>
-                            })
+                                        </div>
+                                })
                         }
                     </AutoPlaySwipeableViews>
                 </Hidden>
