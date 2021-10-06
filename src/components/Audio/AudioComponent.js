@@ -3,7 +3,6 @@ import { PlayArrow, Clear, PauseOutlined, Radio, VolumeUp } from '@material-ui/i
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import db, { rdb } from '../../services/firebase';
 import VolumeComponent from './VolumeComponent';
-import audio1 from  "../../Images/audio1.mp3"
 import {findDateValue, getDateFromTimestamp, WeekDay} from "../../functions/utils" 
 
 function AudioComponent({StreamID}) {
