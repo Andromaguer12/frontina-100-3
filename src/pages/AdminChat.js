@@ -45,7 +45,7 @@ export default function AdminChat() {
                 <AdminChatList data={ChatList} updateChatMessages={updateChatMessages} delChat={(key) => setdelId({id: key, in: true})} />
                 <AdminMessagesView messagesList={CurrentMessagesList()} chatUp={updateChatMessages} />
             </div>
-            {delId.in && <DeleteChat dRef={rdb.ref(`chats/`)} delId={delId.id} cancel={() => setdelId({id: "", in: false})} />}
+            {delId.in && <DeleteChat data={ChatList.length} dRef={rdb.ref(`chats/`)} delId={delId.id} cancel={() => setdelId({id: "", in: false})} />}
         </div>
     )
 }

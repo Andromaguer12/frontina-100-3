@@ -53,7 +53,7 @@ export default function StaffPage() {
                 classNames="Content-load"
             >
                 <React.Fragment>
-                    <div className="maxStaffContainer" style={{ marginTop: hheight+20, overflow: "none", marginBottom: "30px", zIndex: "0" }}>
+                    <div className="maxStaffContainer" style={{ marginTop: hheight+20, overflow: "none", marginBottom: "30px", zIndex: "0", boxShadow: '0 0 10px #00000078' }}>
                         <div>
                             <Typography color="primary" variant="h4" style={{ width: "100%", marginBottom: "10px",  display: "flex", alignItems: "center", flexFlow: "row", justifyContent: "space-between" }}>
                                 Nuestro Staff

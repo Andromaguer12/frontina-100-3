@@ -75,68 +75,27 @@ export const findDateValue = (time) => {
         hour: time.substring(0, 2),
         minutes: parseInt(time.substring(3, 5))
     }
+    const dayTime = time.substring(5, 7)
     var currentValue = 0;
-    switch (state.hour) {
-        case "06":
-            currentValue += 600;
-            break;
-        case "07":
-            currentValue += 700;
-            break;
-        case "08":
-            currentValue += 800;
-            break;
-        case "09":
-            currentValue += 900;
-            break;
-        case "10":
-            currentValue += 1000;
-            break;
-        case "11":
-            currentValue += 1100;
-            break;
-        case "12":
-            currentValue += 1200;
-            break;
-        case "01":
-            currentValue += 1300;
-            break;
-        case "02":
-            currentValue += 1400;
-            break;
-        case "03":
-            currentValue += 1500;
-            break;
-        case "04":
-            currentValue += 1600;
-            break;
-        case "05":
-            currentValue += 1700;
-            break;
-        case "06":
-            currentValue += 1800;
-            break;
-        case "07":
-            currentValue += 1900;
-            break;
-        case "08":
-            currentValue += 2000;
-            break;
-        case "09":
-            currentValue += 2100;
-            break;
-        case "10":
-            currentValue += 2200;
-            break;
-        case "11":
-            currentValue += 2300;
-            break;
-        case "12":
-            currentValue += 2400;
-            break;
-        default:
-            break;
-    }
+    if (state.hour === "06" && dayTime == "am") currentValue += 600; 
+    if (state.hour === "07" && dayTime == "am") currentValue += 700;
+    if (state.hour === "08" && dayTime == "am") currentValue += 800;
+    if (state.hour === "09" && dayTime == "am") currentValue += 900;
+    if (state.hour === "10" && dayTime == "am") currentValue += 1000;
+    if (state.hour === "11" && dayTime == "am") currentValue += 1100;
+    if (state.hour === "12" && dayTime == "am") currentValue += 1200;
+    if (state.hour === "01" && dayTime == "pm") currentValue += 1300;
+    if (state.hour === "02" && dayTime == "pm") currentValue += 1400;
+    if (state.hour === "03" && dayTime == "pm") currentValue += 1500;
+    if (state.hour === "04" && dayTime == "pm") currentValue += 1600;
+    if (state.hour === "05" && dayTime == "pm") currentValue += 1700;
+    if (state.hour === "06" && dayTime == "pm") currentValue += 1800;
+    if (state.hour === "07" && dayTime == "pm") currentValue += 1900;
+    if (state.hour === "08" && dayTime == "pm") currentValue += 2000;
+    if (state.hour === "09" && dayTime == "pm") currentValue += 2100;
+    if (state.hour === "10" && dayTime == "pm") currentValue += 2200;
+    if (state.hour === "11" && dayTime == "pm") currentValue += 2300;
+    if (state.hour === "12" && dayTime == "pm") currentValue += 2400;
     currentValue+=state.minutes;
     return currentValue
 }

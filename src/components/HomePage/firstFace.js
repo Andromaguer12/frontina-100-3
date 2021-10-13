@@ -21,7 +21,7 @@ export default function FirstFace({data}) {
                     </Fab>
                 </Hidden>
                 <Hidden smDown>
-                    <AutoPlaySwipeableViews index={NavigationIndex} onChangeIndex={(index) => setNavigationIndex(index)} enableMouseEvents style={{ width: "80%", height: "100%"}}>
+                    <AutoPlaySwipeableViews interval={7500} index={NavigationIndex} onChangeIndex={(index) => setNavigationIndex(index)} enableMouseEvents style={{ width: "80%", height: "100%"}}>
                         {
                             data.map((card) => {
                                 return <div key={card.id} style={{ width: "100%", padding: "10px 0", display: 'flex', flexFlow: "column", alignItems: "center", justifyContent: "center"}}>
@@ -50,7 +50,7 @@ export default function FirstFace({data}) {
                     </AutoPlaySwipeableViews>
                 </Hidden>
                 <Hidden smUp>
-                    <AutoPlaySwipeableViews index={NavigationIndex} onChangeIndex={(index) => setNavigationIndex(index)} enableMouseEvents style={{ width: "90%", alignItems: "center"}}>
+                    <AutoPlaySwipeableViews interval={7500} index={NavigationIndex} onChangeIndex={(index) => setNavigationIndex(index)} enableMouseEvents style={{ width: "90%", boxSizing: "border-box", alignItems: "center"}}>
                         {
                             data.map((card) => {
                                 return <div key={card.id} style={{ width: "100%", display: 'flex', flexFlow: "column", alignItems: "center", justifyContent: "center"}}>

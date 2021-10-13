@@ -69,7 +69,7 @@ export default function AboutUsPage() {
                 zIndex: "0"
             }}>
             
-                <div className="InfoDivA" style={{ zIndex: "0"}}>
+                <div className="InfoDivA" style={{ zIndex: "0", boxShadow: '0 0 10px #00000078'}}>
                     <Hidden xsDown>
                         <React.Fragment>
                             <div className="infoList">

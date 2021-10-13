@@ -70,7 +70,7 @@
     width: fit-content;
     border-radius: 0 30px 30px 0;
     background: #000000b7;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
@@ -101,6 +101,7 @@
     padding: 20px 25px;
     display: flex;
     flex-flow: row wrap;
+    z-index: 1;
     justify-content: center;
     align-items: flex-start;
 }
@@ -383,6 +384,27 @@
     transition: all 1000ms ease;
 }
 
+.View-More-enter{
+    opacity: 0;
+    transform: translateX(-100px);
+}
+
+.View-More-enter-active{
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms ease;
+}
+.View-More-exit{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.View-More-exit-active{
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 500ms ease;
+}
+
 .Audio-Comp-appear{
     opacity: 0;
     transform: translateX(1000px);
@@ -391,14 +413,21 @@
 .Audio-Comp-appear.Audio-Comp-appear-active{
     opacity: 1;
     transform: translateX(0);
-    transition: all 1000ms ease;
+    transition: all 500ms ease;
 }
 .footerList{
     width: 50%;
 }
+.Programming{
+    width: 80%;
+    max-height: 90vh;
+}
 
 
 @media screen and (max-width: 600px) {
+    .Programming{
+        width: 100%;
+    }
     .addCommentdiv{
         width: 100%;
         padding: 10px;

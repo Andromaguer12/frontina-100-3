@@ -83,14 +83,17 @@ export default function HomePage() {
             {visualModes.aniversario && <Particles params={particlesAnniversaryStyles} style={{ position: "absolute"}}></Particles>}
             <HomeHeader logo={visualModes.logo} pagePosition={0} hHeight={headerHeight} />
             <div className="homePageContainer" style={{ paddingTop: hheight+40 }}>
-                <CSSTransition
+                {Posts.length > 0 ? <CSSTransition
                     in={true}
                     appear={true}
                     timeout={1000}
                     classNames="Content-load"
                 >
                     <FirstFace data={Posts} />
-                </CSSTransition>
+                </CSSTransition> : <div style={{ width: "100%", height: "50vh", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}>
+                        <ErrorOutline style={{ fontSize: "60", color: "#7a7a7a" }} />
+                        <Typography variant="h4" style={{ color: "#7a7a7a" }}> Nada por aqui! </Typography>
+                    </div>}
                 <Feed>
                     <div className="postsContainer">
                             <Tabs style={{ width: "100%", boxSizing: "border-box" }} variant="scrollable" value={tabsValue} onChange={(e, newValue) => setTabsValue(newValue)} textColor="secondary" indicatorColor="secondary" scrollButtons="auto" >
@@ -104,7 +107,7 @@ export default function HomePage() {
                             </Tabs>
                                 <React.Fragment>
                                     <div style={{ width: "100%" }}>
-                                        <SwipeableViews index={tabsValue}>
+                                        <SwipeableViews index={tabsValue} enableMouseEvents onChangeIndex={(value) => setTabsValue(value)}>
                                             {
                                                 categories.map((cate, index) => (
                                                     <CSSTransition

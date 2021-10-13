@@ -1,5 +1,5 @@
 import { CircularProgress, IconButton, List, ListItem, ListItemIcon, ListItemText, makeStyles, Popper, Typography } from '@material-ui/core'
-import { Delete, Settings } from '@material-ui/icons';
+import { Delete, ErrorOutline, Settings } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
@@ -26,6 +26,7 @@ export default function AdminChatList({data, delChat, updateChatMessages}) {
     const [ModeDel, setModeDel] = useState(false)
     const open = Boolean(anchorEl);
     const styledOptions = OptionsStyle();
+    const [Timeout, setTimeoutCount] = useState(0)
 
     
     const dispatch = useDispatch();
@@ -41,6 +42,14 @@ export default function AdminChatList({data, delChat, updateChatMessages}) {
         dispatch(setCurrentChatID(token));
         updateChatMessages();
     }
+    useEffect(() => {
+        if(data.length == 0 && Timeout < 10){
+            setTimeout(() => {
+                setTimeoutCount(Timeout+1);
+            }, 1000);
+        }
+    }, [Timeout])
+
     return (
         <div className="chatListDiv" style={{ overflowY: "none"}}>
             <div style={{ display: "flex", flexFlow: "row", alignItems: "center", width: "100%", padding: "10px", boxSizing: "border-box"}}>
@@ -88,7 +97,11 @@ export default function AdminChatList({data, delChat, updateChatMessages}) {
                     }
                 </List>
             </div>}
-            {data.length == 0 && <div style={{ width: "100%", height: "100%", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}><CircularProgress color="secondary" /></div>}
+            {data.length == 0 && Timeout < 10 && <div style={{ width: "100%", height: "100%", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}><CircularProgress color="secondary" /></div>}
+            {data.length == 0 && Timeout == 10 && <div style={{ color: "#7a7a7a", fontSize: "14px", width: "100%", height: "100%", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }} align="right">
+                    <ErrorOutline style={{ fontSize: "60", color: "#7a7a7a" }} />
+                    <Typography variant="h4" style={{ color: "#7a7a7a" }}> Sin chats! </Typography>
+                </div>}
         </div>
     )
 }

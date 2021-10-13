@@ -148,7 +148,7 @@ export default function ChatPopUp() {
                 <Button variant="outlined" color="secondary" startIcon={<ChatOutlined />} onClick={handleNewChat}>
                     {Loading ? <CircularProgress /> : "INICIAR UN NUEVO CHAT"}
                 </Button>
-                <Button variant="contained" color="secondary" startIcon={<ExitToApp />} onClick={handleNewChat}>
+                <Button variant="contained" color="secondary" startIcon={<ExitToApp />} onClick={handleLogIn}>
                     {Loading ? <CircularProgress /> : "INICIAR SESION CON GOOGLE"}
                 </Button>
             </React.Fragment> : <React.Fragment>

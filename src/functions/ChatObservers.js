@@ -1,3 +1,4 @@
+import { ArrowLeft } from "@material-ui/icons";
 import { rdb } from "../services/firebase";
 
 export const RANDOMID = (chars, lon) => {
@@ -18,28 +19,31 @@ export const setChatsObs = async (updateFunction) => {
                 var chatTokens = Object.keys(snapshot.val())
                 //data
                 const data = [];
-                arr.forEach((chat, index) => {
-                    var viewed = chat.viewed;
-                    var newMsgCounts = chat.newMsgCount;
-                    var chatUsers = chat.users;
-                    delete chat.viewed
-                    delete chat.newMsgCount
-                    delete chat.users
-
-                    const newArray = Object.values(chat)
-                    var firstMessage = newArray.splice(newArray.length - 1, 1)
-                    newArray.splice(0, 0, firstMessage[0]);
-                    var last = newArray.splice(newArray.length - 1, 1)
-
-                    data.push({
-                        chatToken: chatTokens[index],
-                        lastMessage: last,
-                        viewed,
-                        newMsgCounts,
-                        chatUsers
-                        // totalMsg: newArray
+                if(arr.length > 0){
+                    arr.forEach((chat, index) => {
+                        var viewed = chat.viewed;
+                        var newMsgCounts = chat.newMsgCount;
+                        var chatUsers = chat.users;
+                        delete chat.viewed
+                        delete chat.newMsgCount
+                        delete chat.users
+    
+                        const newArray = Object.values(chat)
+                        var firstMessage = newArray.splice(newArray.length - 1, 1)
+                        newArray.splice(0, 0, firstMessage[0]);
+                        var last = newArray.splice(newArray.length - 1, 1)
+    
+                        data.push({
+                            chatToken: chatTokens[index],
+                            lastMessage: last,
+                            viewed,
+                            newMsgCounts,
+                            chatUsers
+                            // totalMsg: newArray
+                        })
                     })
-                })
+                }
+                console.log(arr)
                 updateFunction(data);
 
             }

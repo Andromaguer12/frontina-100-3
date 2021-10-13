@@ -1,13 +1,17 @@
 import { Button, CircularProgress, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { storage } from '../../services/firebase'
+import { setChatsList } from '../../services/reduxToolkit/chatStates/actions'
 
-export default function DeleteChat({dRef, delId, cancel}) {
+export default function DeleteChat({dRef, data, delId, cancel}) {
     const [Loading, setLoading] = useState(false)
+    const dispatch = useDispatch();
     const handleDelete = () => {
         setLoading(true)
         dRef.child(`${delId}`).remove().then(() => {
             cancel();
+            if(data == 1) dispatch(setChatsList([]));
         }).catch((error) => {
             console.log(error)
         })

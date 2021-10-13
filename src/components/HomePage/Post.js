@@ -80,7 +80,7 @@ export default function Post({addCommentF, id, GPref, likedBy, imgData, likes, c
                 </div>
             </div>
             <Typography style={{ padding: "5px 10px" }} >{fullComment ? comment : comment.substring(300, 0)}{comment.length > 300 && <Button variant="outlined" color="secondary" onClick={() => setfullComment(!fullComment)}>{fullComment ? "Leer Menos" : "Leer Mas"}</Button>}</Typography>
-            <img src={imgData} className="postImage" />
+            <img src={imgData} className="postImage" loading="lazy" />
             <div className="postActions">
                 <Popper open={open} anchorEl={anchorEl} placement="top">
                     <CSSTransition

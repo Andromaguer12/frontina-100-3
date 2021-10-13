@@ -14,6 +14,7 @@ import { setCurrentUser } from '../../services/reduxToolkit/userWithGoogle/actio
 import db, { auth } from '../../services/firebase'
 import { CSSTransition } from 'react-transition-group'
 import SearchPopper from './SearchPopper'
+import LoadingLazySpinner from './loadingLazySpinner'
 
 const Links = [
     {
@@ -99,7 +100,7 @@ export default function HomeHeader({logo, hHeight, pagePosition, shadow}) {
         auth.signOut();
     }
     return (
-        <div className="headerContainer" id="homeheader" style={{ position: 'fixed', top: 0, zIndex: 1, backgroundImage: `linear-gradient(to bottom, ${shadow ? "#fff" : "transparent"}, transparent)`, display: "flex" }}>
+        <div className="headerContainer" id="homeheader" style={{ position: 'fixed', top: 0, zIndex: 2, backgroundImage: `linear-gradient(to bottom, ${shadow ? "#fff" : "transparent"}, transparent)`, display: "flex" }}>
             <AppBar position="sticky" className="header" style={{ background: `${Scroll === 0 ? 'transparent' : '#C93832'}`, boxShadow: `${Scroll === 0 ? "0 0 0 transparent" : "0px 2px 10px #00000078"}`}}>
                     <div className="toolbar">
                         <Hidden mdUp>
@@ -108,7 +109,7 @@ export default function HomeHeader({logo, hHeight, pagePosition, shadow}) {
                             </IconButton>
                         </Hidden>
                         <SearchPopper search={InputSearch} open={openS} anchorEl={SanchorEl} />
-                        {!logo ? <Image style={{ color: "#7a7a7a" }} /> : <img src={logo} className="logoimage" />}
+                        {!logo ? <LoadingLazySpinner style={{ width: "40px", height: "40px", borderRadius: "2.5px", background: "#b8b8b8"}} /> : <img src={logo} className="logoimage" />}
                         <Hidden smDown>
                         <div className="inputSearch" style={{ background: `${Scroll === 0 ? "#e7e7e7" : "#e7e7e73a"}`}}>
                             <Search style={{ color: Colors }} />

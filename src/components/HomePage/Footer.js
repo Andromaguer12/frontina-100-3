@@ -1,6 +1,7 @@
 import { Hidden, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
 import { ApartmentOutlined, Call, Chat, Mail, WhatsApp } from '@material-ui/icons'
 import React, { useEffect, useState } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import image from '../../Images/Logo.jpg'
 import db, { rdb } from '../../services/firebase'
 import SeeMore from './SeeMore'
@@ -9,6 +10,7 @@ import SeeMore from './SeeMore'
 export default function Footer() {
     const [SponsorsData, setSponsorsData] = useState([])
     const [Contact, setContact] = useState({})
+    const [showViewMore, setshowViewMore] = useState(true)
 
     useEffect(async () => {
         await db.collection("Sponsors").onSnapshot((state) => {
@@ -20,13 +22,20 @@ export default function Footer() {
             setContact(id.val())
         })
     }, [])
+
+    window.addEventListener("scroll", () => {
+        if(window.scrollY <= 100) {
+            setshowViewMore(true)
+        }
+        else setshowViewMore(false)
+    })
     return (
         <div className="FooterContainer">
             <div className="footerContents" style={{ borderBottom: "1px solid #fff", padding: "20px 0"}}>
                 <img src={image} className="footerLogo" />
                 <div style={{ width: "80%", marginLeft: "10px"}}>
                     <Typography variant="h6" color="primary" className="footerText">Copyright 2021 Frontina 100.3 FM | Radio Comunitaria</Typography>
-                    <Typography variant="h6" color="primary" className="footerText">Powered by Andromaguer121</Typography>
+                    <Typography variant="h6" color="primary" className="footerText">Powered by Andromaguer122</Typography>
                     <Hidden xsDown>
                         <div className="sponsorsFooterDiv">
                             <Typography  color="primary" style={{ margin: "5px 0", display: "flex", alignItems: "center", flexFlow: "row" }}>Patrocinadores <ApartmentOutlined /> </Typography>
@@ -78,8 +87,14 @@ export default function Footer() {
                     </ListItem>
                 </List>
             </div>
-            <SeeMore links={Contact} />
-
+            <CSSTransition
+                in={showViewMore}
+                timeout={500}
+                classNames="View-More"
+                unmountOnExit
+            >   
+                <SeeMore links={Contact} />
+            </CSSTransition>
         </div>
     )
 }

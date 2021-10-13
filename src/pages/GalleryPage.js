@@ -6,7 +6,7 @@ import "../Styles/HomePage.css"
 import "../Styles/Gallery.css"
 import SwipeableViews from 'react-swipeable-views'
 import { Button, Fab, Hidden, Typography } from '@material-ui/core'
-import { ArrowBackIosOutlined, ArrowForwardIosOutlined, LinkOutlined } from '@material-ui/icons'
+import { ArrowBackIosOutlined, ArrowForwardIosOutlined, ErrorOutline, LinkOutlined } from '@material-ui/icons'
 import NewsDots from '../components/HomePage/NewsDots'
 import { CSSTransition } from 'react-transition-group'
 import ZoomImage from '../components/Gallery/ZoomImage'
@@ -14,6 +14,7 @@ import { rdb } from '../services/firebase'
 import { infoRef } from './AdminAppInfo'
 import { particlesAnniversaryStyles, particlesChristmasStyles } from '../Styles/particlesStyles'
 import Particles from 'react-particles-js'
+import LoadingLazySpinner from '../components/HomePage/loadingLazySpinner'
 
 export default function GalleryPage() {
     const [hheight, sethheight] = useState(0)
@@ -67,55 +68,62 @@ export default function GalleryPage() {
                 classNames="Content-load"
             >
                 <React.Fragment>
-                    <div className="galleryContent" style={{ paddingTop: hheight+20, marginBottom: "30px", zIndex: "0" }}>
+                    {Departments.length > 0 ? <div className="galleryContent" style={{ paddingTop: hheight+20, marginBottom: "30px", zIndex: "0", boxShadow: '0 0 10px #00000078' }}>
                         <Hidden xsDown>
                             <Fab onClick={() => setNavigationIndex(NavigationIndex == 0 ? 0 : NavigationIndex-1)}>
                                 <ArrowBackIosOutlined color="secondary" />
                             </Fab>
                         </Hidden>
                         <div className="swiper" id="galleryswiper">
-                            <SwipeableViews index={NavigationIndex} enableMouseEvents>
+                            <SwipeableViews index={NavigationIndex} onChangeIndex={(index) => setNavigationIndex(index)} enableMouseEvents>
                                 {
-                                    Departments.map((file, index) => (
-                                        <div className="fileCard">
-                                            <div className="imggallery" style={{ position: "relative", boxSizing: "border-box", background: "#e7e7e7", borderRadius: "10px 0 0 10px", height: "100%", display: "flex", flexFlow: "row", alignItems: "center", justifyContent: "center" }}>
-                                                <img src={file.image} className="fileCardStyle" />
-                                                <div className="imagesShadow" onClick={() => handleZoomImage(index)}>
-                                                    <Typography color="primary" variant="h4">
-                                                        Ampliar Imagen
+                                    Departments.map((file, index) => {
+                                        return (
+                                            <div className="fileCard">
+                                                    <div className="imggallery" style={{ position: "relative", boxSizing: "border-box", background: "#e7e7e7", borderRadius: "10px 0 0 10px", height: "100%", display: "flex", flexFlow: "row", alignItems: "center", justifyContent: "center" }}>
+                                                        <img  src={file.image} loading="lazy" className="fileCardStyle" />
+                                                        <Hidden xsDown>
+                                                                <div className="imagesShadow" onClick={() => handleZoomImage(index)}>
+                                                                    <Typography color="primary" variant="h4">
+                                                                        Ampliar Imagen
+                                                                    </Typography>
+                                                                </div>
+                                                        </Hidden>
+                                                    </div>  
+                                                <div className="imggallery" style={{ boxSizing: "border-box", overflow: "auto", boxShadow: "-2px 0 10px #7a7a7a", padding: "20px", height: "70vh", display: "flex", flexFlow: "column", alignItems: "center" }}>
+                                                    <Hidden xsDown>
+                                                        <Typography color="secondary" variant="h4">
+                                                            {file.title}
+                                                        </Typography>
+                                                    </Hidden>
+                                                    <Hidden smUp>
+                                                        <Typography color="secondary">
+                                                            {file.title}
+                                                        </Typography>
+                                                    </Hidden>
+                                                    <Typography style={{ fontSize: "15px", marginTop: "20px", color: "#7a7a7a"  }}>
+                                                        {file.info}
                                                     </Typography>
+                                                    {file.link && <Button href={file.link} color="secondary" endIcon={<LinkOutlined />}>
+                                                        Leer mas...
+                                                    </Button>}
                                                 </div>
                                             </div>
-                                            <div className="imggallery" style={{ boxSizing: "border-box",  maxHeight: "30vh", overflow: "auto", boxShadow: "-2px 0 10px #7a7a7a", padding: "20px", height: "70vh", display: "flex", flexFlow: "column", alignItems: "center" }}>
-                                                <Hidden xsDown>
-                                                    <Typography color="secondary" variant="h4">
-                                                        {file.title}
-                                                    </Typography>
-                                                </Hidden>
-                                                <Hidden smUp>
-                                                    <Typography color="secondary">
-                                                        {file.title}
-                                                    </Typography>
-                                                </Hidden>
-                                                <Typography style={{ fontSize: "15px", marginTop: "20px", color: "#7a7a7a"  }}>
-                                                    {file.info}
-                                                </Typography>
-                                                {file.link && <Button href={file.link} color="secondary" endIcon={<LinkOutlined />}>
-                                                    Leer mas...
-                                                </Button>}
-                                            </div>
-                                        </div>
-                                    ))
+                                        )
+                                    })
                                 }
                             </SwipeableViews>
-                        </div>
+                        </div> 
 
                         <Hidden xsDown>
                             <Fab onClick={() => setNavigationIndex(NavigationIndex == Departments.length-1 ? Departments.length-1 : NavigationIndex+1)}>
                                 <ArrowForwardIosOutlined color="secondary" />
                             </Fab>
                         </Hidden>
-                    </div>
+                    </div>: <div style={{ width: "100%", height: "50vh", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}>
+                            <ErrorOutline style={{ fontSize: "60", color: "#7a7a7a" }} />
+                            <Typography variant="h4" style={{ color: "#7a7a7a" }}> Nada por aqui! </Typography>
+                        </div>}
                     <NewsDots length={Departments} index={NavigationIndex} />
                 </React.Fragment>
             </CSSTransition>
