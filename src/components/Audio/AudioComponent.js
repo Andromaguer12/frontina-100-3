@@ -48,9 +48,7 @@ function AudioComponent({StreamID}) {
             const timestamp = getDateFromTimestamp(currentTime);
             if(timestamp.hour.length > 0) {
                 const timeValue = findDateValue(timestamp.hour);
-                console.log(timeValue)
                 const currentProgram = Programming.filter((doc) => {
-                    console.log(WeekDay(doc.streamDay.toLowerCase()))
                     return timeValue >= doc.time.from.value && timeValue < doc.time.once.value && WeekDay(doc.streamDay.toLowerCase())
                  })
                 setProgram(currentProgram[0]?.programName)
@@ -81,7 +79,10 @@ function AudioComponent({StreamID}) {
                         Listo para reproducir.
                     </Typography>}
                     <Typography color="primary" style={{ fontSize: "12px"  }}>
-                        {Boolean(Program) ? Program : "Programa no registrado" }
+                        {Boolean(Program) ? Program.substring(0, 30) : "Programa no registrado" }
+                    </Typography>
+                    <Typography color="primary" style={{ fontSize: "12px"  }}>
+                        Radio Frontina 100.3 FM
                     </Typography>                    
                 </div>
                 <Popper open={open} style={{ zIndex: "120"}} anchorEl={anchorEl} placement="top">

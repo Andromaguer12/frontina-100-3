@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "chats": {
+       ".read": "true",
+       ".write": "true",
+    },
+    "contacts": {
+       ".read": "true",
+       ".write": "auth != null",
+    },
+    "pagesVisitedByUsers": {
+       ".read": "true",
+       ".write": "true",
+    },
+    "streamID": {
+       ".read": "true",
+       ".write": "auth != null",
+    },
+    "visualModes": {
+       ".read": "true",
+       ".write": "auth != null",
+    }
+    
+  }
+}

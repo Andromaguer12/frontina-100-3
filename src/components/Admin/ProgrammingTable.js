@@ -15,7 +15,6 @@ const CustomTr = ({edit, ...props}) => {
     const [loading, setloading] = useState(false)
 
     const handleInputs = (e) => {
-        console.log(e)
         setUpdate({
             ...updateState,
             [e.target.name]: e.target.value

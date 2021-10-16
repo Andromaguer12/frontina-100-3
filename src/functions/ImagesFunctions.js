@@ -30,10 +30,8 @@ export const handleOptimizedImg = async (file, width, height) => {
                 let ctx = canvas.getContext("2d");
                 canvas.height = height ? imge.naturalHeight/2 : 264;
                 canvas.width = width ? imge.naturalWidth/2 : 396;
-                // console.log(imge.naturalWidth, imge.naturalHeight)
                 ctx.drawImage(imge, 0, 0, imge.width, imge.height, 0, 0, canvas.width, canvas.height);
                 resolve(canvas.toDataURL("image/png", 1));
-                console.log(canvas.width, canvas.height)
                 one+=1
 
             }

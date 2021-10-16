@@ -48,11 +48,12 @@ export const getUserDoc = async (email, name) => {
                     muted: false,
                     createDate: new Date().getTime(),
                     lastConnection: new Date().getTime(),
-                    img: "https://firebasestorage.googleapis.com/v0/b/frontina-100-3.appspot.com/o/userX.png?alt=media&token=7cd3b4d3-1715-42dd-b39a-3f843be281fe",
+                    img: auth.currentUser.photoURL,
                     auth: "user",
                     secondaryAuth: "any"
                 }
                 usersRef.doc(`${email}`).set(newUserData).then(async () => {
+                    await createNewChannel(chatToken, email, name);
                     await usersRef.doc(`${email}`).get().then((doc) => {
                         var obj = {
                             id: doc.id,
@@ -69,7 +70,7 @@ export const getUserDoc = async (email, name) => {
 export const logIn = async (email, pass) => {
     return await new Promise((resolve, reject) => {
         auth.signInWithEmailAndPassword(email, pass).then(async (authdata) => {
-            const userDoc = await getUserDoc(auth.currentUser.email).then(doc => {
+            await getUserDoc(auth.currentUser.email).then(doc => {
                 const array = [
                     auth.currentUser, 
                     doc

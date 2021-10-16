@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
     flex-flow: row;
-    justify-content: space-around;
+    justify-content: center;
 }
 .logoimage{
     width: 15%;
@@ -236,6 +236,7 @@
     background: #7a7a7a7a;
     width: fit-content;
     padding: 10px;
+    z-index: 2;
     position: fixed;
     left: 0;
     bottom: 100px;

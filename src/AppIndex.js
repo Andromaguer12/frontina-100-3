@@ -9,9 +9,6 @@ import { useSelector } from 'react-redux';
 
 export default function AppIndex() {
   const user = useSelector(useAdminUser);
-  // useEffect(() => {
-  //   console.log(user[1])
-  // })
   return (
     <BrowserRouter>
       <Suspense fallback={<div style={{ width: "100%", height: "100vh", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}><CircularProgress color="secondary" /></div>}>

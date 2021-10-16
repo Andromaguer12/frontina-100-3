@@ -28,7 +28,6 @@ export default function AddComment({cancel, GPref, id, ccomments}) {
                 }
             })
             if(form.get("comment")){
-                console.log(commentscopy)    
                 GPref.doc(`${id}`).update({
                     comments: commentscopy
                 }).then(() => {e.target.reset(); setLoading(false);})
@@ -54,7 +53,6 @@ export default function AddComment({cancel, GPref, id, ccomments}) {
                 }
             })
             if(form.get("comment")){
-                console.log(commentscopy)    
                 GPref.doc(`${id}`).update({
                     comments: commentscopy
                 }).then(() => {e.target.reset(); setLoading(false);})

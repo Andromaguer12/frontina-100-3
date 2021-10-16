@@ -50,7 +50,6 @@ export default function AboutUsAdmin({toggleAdd, toggleEdit, toggleDelete}) {
         infoRef.doc("aboutUs").collection("cont").onSnapshot((state) => {
             const docs = [];
             state.forEach((doc) => docs.push({...doc.data(), id: doc.id}))
-            console.log("hola")
             setDepartments(docs)
         })
     }, [])

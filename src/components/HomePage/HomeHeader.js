@@ -109,7 +109,7 @@ export default function HomeHeader({logo, hHeight, pagePosition, shadow}) {
                             </IconButton>
                         </Hidden>
                         <SearchPopper search={InputSearch} open={openS} anchorEl={SanchorEl} />
-                        {!logo ? <LoadingLazySpinner style={{ width: "40px", height: "40px", borderRadius: "2.5px", background: "#b8b8b8"}} /> : <img src={logo} className="logoimage" />}
+                        {!logo ? <LoadingLazySpinner style={{ width: "40px", height: "40px", borderRadius: "5px", background: "#b8b8b8"}} /> : <img src={logo} className="logoimage" placeholder="frontina fm Frontina FM 100.3" />}
                         <Hidden smDown>
                         <div className="inputSearch" style={{ background: `${Scroll === 0 ? "#e7e7e7" : "#e7e7e73a"}`}}>
                             <Search style={{ color: Colors }} />
@@ -158,8 +158,8 @@ export default function HomeHeader({logo, hHeight, pagePosition, shadow}) {
                                 </Popper>
                                 <Button variant="outlined" style={{ color: Colors, borderColor: Colors, margin: "0 20px" }} onClick={handleLogIn}>Acceder</Button>
                             </React.Fragment> : <React.Fragment>
-                                <img src={googleUser.currentUser[0].user.photoURL} style={{ width: "20%", borderRadius: "50%", margin: "0 5px" }} onClick={() => console.log()} />
-                                <Typography style={{ color: `${Scroll === 0 ? "#7a7a7a" : "#fff"}`}}>{googleUser.currentUser[1].name.substring(0, spaceIndex)}</Typography>
+                                <img src={googleUser.currentUser[0].user.photoURL} style={{ width: "20%", borderRadius: "50%", background: '#fff', padding: "2.5px", margin: "0 5px" }} />
+                                {/* <Typography style={{ color: `${Scroll === 0 ? "#7a7a7a" : "#fff"}`}}>{googleUser.currentUser[1].name.substring(0, spaceIndex)}</Typography> */}
                                 <IconButton style={{ color: `${Scroll === 0 ? "#7a7a7a" : "#fff"}`}} onClick={handleSignOut}>
                                     <ExitToApp />
                                 </IconButton>   

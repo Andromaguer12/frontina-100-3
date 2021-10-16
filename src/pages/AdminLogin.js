@@ -80,7 +80,7 @@ export default function AdminLogin() {
                         <TextField name="email" variant="outlined" color="primary" label="E-mail" style={{width: "100%", margin: "10px 0"}} />
                         <TextField type="password" name="password" variant="outlined" color="primary" label="Contraseña" style={{width: "100%", margin: "10px 0"}} />  
                         <div style={{ width: "100%", display: "flex", alignItems: "center", flexFlow: "row", justifyContent: "center"}}>
-                            <Button href="/home" variant="contained" color="primary" fullWidth style={{ margin: "0 10px"}} endIcon={<Home />}>
+                            <Button href="/" variant="contained" color="primary" fullWidth style={{ margin: "0 10px"}} endIcon={<Home />}>
                                 Volver al inicio
                             </Button>
                             <Button type="submit" variant="contained" color="secondary" fullWidth style={{ margin: "0 10px"}} endIcon={<ExitToApp />}>

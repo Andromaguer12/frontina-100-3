@@ -84,7 +84,6 @@ export default function AdminMessagesView({messagesList, chatUp}) {
                 chatUp();
             }, 200);
         }
-        // console.log(new FormData(document.getElementById("form")).get("message"))
     }
     useEffect(() => {
         const msgbox = document.getElementById("chatmsgboxadmin");

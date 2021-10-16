@@ -1,5 +1,5 @@
 export const AllRoutes = {
-    home: "/home",
+    home: "/",
     programming: "/programming",
     aboutUs: "/about-us",
     gallery: "/gallery",
@@ -14,5 +14,5 @@ export const AllRoutes = {
     adminProgramming: "/admin/dashboard/programming",
     adminInfo: "/admin/dashboard/app-info",
     blocked: '/error/blocked-user',
-    any: "/"
+    any: "*"
 }

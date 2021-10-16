@@ -16,7 +16,6 @@ export default function PrivateRoutes({route, template, auth, altAuth, component
     const Layout = template;
 
     if(userData[1].blocked) {
-        console.log("entro aqui")
         dispatch(setAdminUser([null, {
             blocked: true,
             email: null,
@@ -32,8 +31,6 @@ export default function PrivateRoutes({route, template, auth, altAuth, component
         return <Redirect to={AllRoutes.blocked} />
     }
     else{
-        console.log(userData[1].blocked)
-
         if(isPageAdmin(auth, altAuth) && isPageAdmin(userData[1].auth, userData[1].secondaryAuth) && !userData[1].blocked) 
             return <Layout Component={component} {...props} />
 

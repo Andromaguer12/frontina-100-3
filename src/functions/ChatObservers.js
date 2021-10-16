@@ -43,7 +43,6 @@ export const setChatsObs = async (updateFunction) => {
                         })
                     })
                 }
-                console.log(arr)
                 updateFunction(data);
 
             }

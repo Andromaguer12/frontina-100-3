@@ -24,17 +24,17 @@ export default function Footer() {
     }, [])
 
     window.addEventListener("scroll", () => {
-        if(window.scrollY <= 100) {
-            setshowViewMore(true)
+        if(window.scrollY > 500) {
+            setshowViewMore(false)
         }
-        else setshowViewMore(false)
+        else if(window.scrollY == 0) setshowViewMore(true)
     })
     return (
         <div className="FooterContainer">
             <div className="footerContents" style={{ borderBottom: "1px solid #fff", padding: "20px 0"}}>
                 <img src={image} className="footerLogo" />
                 <div style={{ width: "80%", marginLeft: "10px"}}>
-                    <Typography variant="h6" color="primary" className="footerText">Copyright 2021 Frontina 100.3 FM | Radio Comunitaria</Typography>
+                    <Typography variant="h6" color="primary" className="footerText">Copyright {new Date().getFullYear()} Frontina 100.3 FM | Radio Comunitaria</Typography>
                     <Typography variant="h6" color="primary" className="footerText">Powered by Andromaguer122</Typography>
                     <Hidden xsDown>
                         <div className="sponsorsFooterDiv">
