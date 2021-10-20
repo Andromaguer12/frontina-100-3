@@ -13,7 +13,7 @@ export default function AddAboutDepartment({cancel}) {
     const handleDepartment = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        const array = [form.get("departName"), form.get("info"), form.get("link")];
+        const array = [form.get("departName"), form.get("info")];
         const verification = [];
         array.forEach((input) => {
             if(input === ""){

@@ -59,7 +59,7 @@ export default function StaffPage() {
                                 Nuestro Staff
                             </Typography>
                             <Typography color="primary" style={{ width: "100%", marginBottom: "10px",  display: "flex", alignItems: "center", flexFlow: "row", justifyContent: "space-between" }}>
-                                Nuestro equipo siempre esforzando e innovando cada dia para una muy buena atencion, y brindarles la mejor experiencia en la radio!
+                                Nuestro personal de cabina, productores y directivos trabajan arduamente para presentarles un producto de alta gama
                             </Typography>
                         </div>
                         <div className="staffContainer" style={{ overflow: "auto", maxHeight: "100%", background: "transparent", width: "100%"}}>

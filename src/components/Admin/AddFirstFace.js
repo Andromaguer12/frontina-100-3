@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { RANDOMID } from '../../functions/ChatObservers'
-import { handleOptimizedImg, uploadImages } from '../../functions/ImagesFunctions'
+import { FullWidthImage, handleOptimizedImg, uploadImages } from '../../functions/ImagesFunctions'
 import { useAdminUser } from '../../services/reduxToolkit/adminUserLogin/selectors'
 
-export default function AddFirstFace({pRef, cancel, variation}) {
+export default function AddFirstFace({pRef, cancel, variation, FullR}) {
     const adminUser = useSelector(useAdminUser);    
     const [Categorie, setCategorie] = useState("Ultima Hora")
     const [UploadState, setUploadState] = useState(0)
@@ -15,10 +15,11 @@ export default function AddFirstFace({pRef, cancel, variation}) {
     const [Error, setError] = useState(false)
     const [Uploading, setUploading] = useState(false)
     const [ImgSelec, setImgSelec] = useState([])
+    const [uMImages, setuMImages] = useState([])
     const OptimizeImage = async (e) => {
         const imgCopy = [];
         Array.from(e.target.files).forEach(async(file) => {
-            await handleOptimizedImg(file).then((Optimg) => {
+            await handleOptimizedImg(file, file.naturalWidth, file.naturalHeight).then((Optimg) => {
                 imgCopy.push(Optimg)
                 setImgSelec(imgCopy);
             }).catch((error) => {
@@ -29,16 +30,7 @@ export default function AddFirstFace({pRef, cancel, variation}) {
     const categories = ["Ultima Hora", "Deportes", "Politica", "Economia", "Gastronomia", "Musica", "Tecnologia"]
 
     const handleNewPost = async (e, id, imageUrl) => {
-        e.preventDefault();
-        const form = new FormData(e.target);
-        const array = [form.get("title"), form.get("categorie"), form.get("text")];
-        const verification = []
-        array.forEach((input) => {
-            if(input === ""){
-                verification.push(true);
-            }
-        })        
-        if(verification.length === 0){
+            const form = new FormData(e.target);   
             await pRef.doc(`${id}`).set({
                 contentType: form.get("categorie"),
                 text: form.get("text"),
@@ -58,23 +50,46 @@ export default function AddFirstFace({pRef, cancel, variation}) {
             setTimeout(() => {
                 cancel();    
             }, 3000);
-        }
     }
 
     const handleUploadPost = async (e) => {
         e.preventDefault();
-        setUploading(true);
+        const form = new FormData(e.target);
+        const array = [form.get("title"), form.get("text")];
+        const verification = []
         const newPostID = RANDOMID('AaBbNnJjHhGgTtYyCcDd123456789', 15);
-        await uploadImages(ImgSelec, variation ? "globalPosts" : "firstFace", "Posts", newPostID, (newvalue) => setUploadState(newvalue)).then((url) => {
-            setUploadState(100)
-            handleNewPost(e, newPostID, url)
-        }).catch(() => {
-            setUploading(false);
-            setError(true);
-            setTimeout(() => {
-                setError(false)
-            }, 3000);
-        })
+        array.forEach((input) => {
+            if(input === ""){
+                verification.push(true);
+            }
+        }) 
+        if(ImgSelec.length == 0) verification.push(true); 
+        if(verification.length === 0 && !FullR){
+            setUploading(true);
+            await uploadImages(ImgSelec, variation ? "globalPosts" : "firstFace", "Posts", newPostID, (newvalue) => setUploadState(newvalue)).then((url) => {
+                setUploadState(100)
+                handleNewPost(e, newPostID, url)
+            }).catch(() => {
+                setUploading(false);
+                setError(true);
+                setTimeout(() => {
+                    setError(false)
+                }, 3000);
+            })
+        }
+        else if(verification.length === 0 && FullR) {
+            setUploading(true);
+            await FullWidthImage(uMImages, variation ? "globalPosts" : "firstFace", "Posts", newPostID, (newvalue) => setUploadState(newvalue)).then((url) => {
+                setUploadState(100)
+                handleNewPost(e, newPostID, url)
+            }).catch(() => {
+                setUploading(false);
+                setError(true);
+                setTimeout(() => {
+                    setError(false)
+                }, 3000);
+            })
+        }
     }
 
     return (
@@ -87,7 +102,7 @@ export default function AddFirstFace({pRef, cancel, variation}) {
                         {categories.map((categories) => <MenuItem value={categories}>{categories}</MenuItem>)}
                     </TextField>
                     <div style={{ backgroundImage: `url(${ImgSelec.length > 0 ? ImgSelec[0] : "" })`, backgroundSize: "cover", backgroundColor: "#e7e7e7", width: "100%", borderRadius: "10px", display: "flex", alignItems: "center", flexFlow: "column", justifyContent: "center"}}>
-                        <input type="file" hidden="hidden" id="inputImg" onChange={OptimizeImage} />
+                        <input type="file" hidden="hidden" id="inputImg" onChange={FullR ? (e) => {setuMImages(Array.from(e.target.files)); OptimizeImage(e)} :  (e) => OptimizeImage(e) } />
                         <IconButton style={{ color: "#7a7a7a", margin: "100px" }} onClick={() => {
                             document.getElementById("inputImg").click();
                         }}>

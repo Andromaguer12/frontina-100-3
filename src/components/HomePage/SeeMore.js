@@ -14,18 +14,26 @@ export default function SeeMore({links}) {
                 unmountOnExit
             >
                     <div>
-                    <IconButton href={links.facebook}  color="primary" size="small" style={{ margin: "5px"}}>
-                        <Facebook />
-                    </IconButton>
-                    <IconButton href={links.instagram} color="primary" size="small" style={{ margin: "5px"}}>
-                        <Instagram />
-                    </IconButton>
-                    <IconButton href={links.twitter} color="primary" size="small" style={{ margin: "5px"}}>
-                        <Twitter />
-                    </IconButton>
-                    <IconButton href={links.telegram} color="primary" size="small" style={{ margin: "5px"}}>
-                        <Telegram />
-                    </IconButton>
+                    <a href={links.facebook} target="blank">
+                        <IconButton  color="primary" size="small" style={{ margin: "5px"}}>
+                            <Facebook />
+                        </IconButton>
+                    </a>
+                    <a href={links.instagram} target="blank">
+                        <IconButton color="primary" size="small" style={{ margin: "5px"}}>
+                            <Instagram />
+                        </IconButton>
+                    </a>
+                    <a href={links.twitter} target="blank">
+                        <IconButton color="primary" size="small" style={{ margin: "5px"}}>
+                            <Twitter />
+                        </IconButton>
+                    </a>
+                    <a href={links.telegram} target="blank">
+                        <IconButton color="primary" size="small" style={{ margin: "5px"}}>
+                            <Telegram />
+                        </IconButton>
+                    </a>
                     <IconButton color="secondary" size="small" onClick={() => setopen(!open)} style={{ margin: "5px"}}>
                         <Clear />
                     </IconButton>

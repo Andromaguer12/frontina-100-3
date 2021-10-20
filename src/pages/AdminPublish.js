@@ -56,7 +56,7 @@ export default function AdminPublish() {
                 classNames="Zoom-Image"
                 unmountOnExit
             >
-                <AddFirstFace pRef={pRef} cancel={() => setFFadd(!FFadd)} />
+                <AddFirstFace FullR={true} pRef={pRef} cancel={() => setFFadd(!FFadd)} />
             </CSSTransition>
             <CSSTransition
                 in={GPadd}

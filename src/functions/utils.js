@@ -1,3 +1,5 @@
+import { days } from "../components/Admin/AddProgrammingRow";
+
 export const handleINPUTS = e => {
     var diasem = parseInt(document.getElementsByName('diasemana')[0].value);
     var diafec = parseInt(document.getElementsByName('diafecha')[0].value);
@@ -25,49 +27,14 @@ export const handleINPUTS = e => {
 }
 
 export const WeekDay = (weekday) => {
-    var weekDay = ""
-    switch (new Date().getDay()) {
-        case 0:
-            weekDay = "domingo"
-            break;
-        case 1:
-            weekDay = "lunes"
-            break;
-        case 2:
-            weekDay = "martes"
-            break;
-        case 3:
-            weekDay = "miercoles"
-            break;
-        case 4:
-            weekDay = "jueves"
-            break;
-        case 5:
-            weekDay = "viernes"
-            break;
-        case 6:
-            weekDay = "sabado"
-            break;
-        default:
-            break;
-    }
-    if(weekday === weekDay){
+    var validation = false;
+    weekday.forEach((w) => {
+        days.indexOf(w) == new Date().getDay() ? validation = true : validation = false  
+    })
+    if(validation){
         return true
     }
-    else if(weekday === "lunes a viernes" || weekday === "fines de semana"){
-        if(weekday === "lunes a viernes" && new Date().getDay() < 6 && new Date().getDay() > 0){
-            return true
-        }
-        else{
-            return false
-        }
-        if(weekday === "fines de semana" && new Date().getDay() == 6 || new Date().getDay() == 0){
-            return true
-        }
-        else{
-            return false
-        }
-    }
+    else return false
 }
 
 export const findDateValue = (time) => {
@@ -104,6 +71,6 @@ export const getDateFromTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     return {
         date: `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}/${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}/${date.getFullYear()}`,
-        hour: `${date.getHours() > 12 ? date.getHours()-12 : `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}`}:${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}${date.getHours() > 12 ? "pm" : "am"}`
+        hour: `${date.getHours() > 12 ? `0${date.getHours()-12}` : `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}`}:${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}${date.getHours() > 12 ? "pm" : "am"}`
     }
 }

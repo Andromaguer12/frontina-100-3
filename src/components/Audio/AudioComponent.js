@@ -49,7 +49,7 @@ function AudioComponent({StreamID}) {
             if(timestamp.hour.length > 0) {
                 const timeValue = findDateValue(timestamp.hour);
                 const currentProgram = Programming.filter((doc) => {
-                    return timeValue >= doc.time.from.value && timeValue < doc.time.once.value && WeekDay(doc.streamDay.toLowerCase())
+                    return timeValue >= doc.time.from.value && timeValue < doc.time.once.value && WeekDay(doc.streamDay)
                  })
                 setProgram(currentProgram[0]?.programName)
             }

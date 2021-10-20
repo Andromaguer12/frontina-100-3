@@ -15,6 +15,15 @@ export default function AdminLogin() {
     const [Wpass, setWpass] = useState(false);
     const [Wemail, setWemail] = useState(false)
     const dispatch = useDispatch();
+    
+    const updateLastConnection = (key) => {
+        const currentDate = new Date().getTime();
+        db.collection("UsuariosData").doc(auth.currentUser.email).update({
+            lastConnection: currentDate
+        }).then(() => {
+            dispatch(setAdminUser(key));
+        }).catch((error) => console.log(error))
+    }
 
     const handleLogin = (e) => {
         setLoading(true);
@@ -24,13 +33,10 @@ export default function AdminLogin() {
         const loginform = new FormData(e.target);
         if(loginform.get("email") != "" || loginform.get("password") != ""){
             logIn(loginform.get("email"), loginform.get("password")).then((result) => {
-                dispatch(setAdminUser(result));
-                const Date = new Date().getTime();
-                db.collection("UsuariosData").doc(auth.currentUser.email).update({
-                    lastConnection: Date
-                }).catch((error) => console.log(error))
+                updateLastConnection(result)
             }).catch((error) => {
                 setLoading(false);
+                console.log(error)
                 if(passerror(error.code)){
                     setWpass(true);
                     setTimeout(() => {

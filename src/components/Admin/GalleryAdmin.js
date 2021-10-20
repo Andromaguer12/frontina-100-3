@@ -62,7 +62,7 @@ export default function GalleryAdmin({toggleAdd, toggleDelete}) {
                                         </Typography>
                                         <img src={depart.image} style={{ height: "auto", width: "50%", borderRadius: "10px", margin: "0 auto"}} />
                                         <Typography color="secondary" style={{ maxWidth: "100%", margin: "10px 0", boxSizing: "border-box"}}>
-                                            Link agregado: {depart.link}
+                                            Link agregado: {depart.link == null ? "Sin link." : depart.link}
                                         </Typography>
                                     </div>
                                     <div>

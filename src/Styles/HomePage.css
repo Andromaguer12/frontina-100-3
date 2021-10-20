@@ -56,6 +56,7 @@
 }
 .FFcard{
     width: 90%;
+    position: relative;
     box-shadow: 2px 2px 5px #7a7a7a;
     background-color: #e7e7e7;
     height: 75vh;
@@ -63,7 +64,7 @@
     background-size: cover;
     display: flex;
     flex-flow: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     /* padding-bottom: 100px; */
 }
 .FFdata{
@@ -78,13 +79,18 @@
 }
 .NewsTag{
     width: 100%;
-    background: #000000b7;
-    margin-bottom: 30px;
+    background: #00000079;
     padding: 20px;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
     box-sizing: border-box;
+    bottom: 0;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
+}
+.NTR{
+    position: relative;
 }
 .dots{
     width: fit-content;

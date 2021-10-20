@@ -1,4 +1,4 @@
-import { auth, googleProvider, rdb, usersRef } from '../services/firebase'
+import db, { auth, googleProvider, rdb, usersRef } from '../services/firebase'
 import { RANDOMID } from './ChatObservers';
 
 export const createNewChannel = async (chatToken, email, name) => {
@@ -70,13 +70,13 @@ export const getUserDoc = async (email, name) => {
 export const logIn = async (email, pass) => {
     return await new Promise((resolve, reject) => {
         auth.signInWithEmailAndPassword(email, pass).then(async (authdata) => {
-            await getUserDoc(auth.currentUser.email).then(doc => {
-                const array = [
-                    auth.currentUser, 
-                    doc
-                ]
-                resolve(array);
-            });
+                await getUserDoc(auth.currentUser.email).then(doc => {
+                    const array = [
+                        auth.currentUser, 
+                        doc
+                    ]
+                    resolve(array);
+                });
         }).catch((error) => {
             reject(error)
         })

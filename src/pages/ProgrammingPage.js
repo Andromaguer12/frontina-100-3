@@ -42,7 +42,7 @@ export default function ProgrammingPage() {
             {visualModes.aniversario && <Particles params={particlesAnniversaryStyles} style={{ position: "absolute", left: "0", zIndex: "0"}}></Particles>}
             <div className="Programming" style={{ marginTop: hheight+20, boxSizing: "border-box", zIndex: "1", display: "flex", flexFlow: "column", alignItems: "center", boxShadow: '0 0 10px #00000078', padding: "10px", overflow: "auto", background: "#0000007a", borderRadius: "10px" }}>
                 <Typography align="center" color="primary" variant="h4" style={{ marginTop: "20px", display: "flex", alignItems: "center", flexFlow: "row"}}>Programacion de la semana <History style={{ margin: "0 10px"}} fontSize="large" /></Typography>
-                <Typography align="center" color="primary" style={{ width: "100%", fontSize: "14px", margin: "20px 0"  }}>Para que nunca te pierdas la tu programa favorito, Frontina 100.3 FM tu mejor compañia!</Typography>
+                <Typography align="center" color="primary" style={{ width: "100%", fontSize: "14px", margin: "20px 0"  }}>Programación diferente para todas la edades sin despegarte de nuestro dial 100.3</Typography>
                 <div style={{ width: "100%", maxWidth: "100%", overflow: "auto"}}>
                     <ProgrammingTable hideConfig={true} style={{ paddingTop: hheight+20, marginBottom: "30px", width: "100%", overflowX: "auto" }} />
                 </div>

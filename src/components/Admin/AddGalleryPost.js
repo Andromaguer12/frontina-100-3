@@ -28,13 +28,14 @@ export default function AddGalleryPost({cancel, gRef}) {
     const handleNewPost = (e, id, imageUrl) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        const array = [form.get("title"), form.get("info"), form.get("link")];
-        const verification = []
+        const array = [form.get("title"), form.get("info")];
+        const verification = [];
         array.forEach((input) => {
             if(input === ""){
                 verification.push(true);
             }
-        })        
+        })
+        console.log(verification.length)        
         if(verification.length === 0){
             setUploadState(100)
             gRef.doc(`${id}`).set({

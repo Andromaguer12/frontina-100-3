@@ -1,12 +1,12 @@
-import { InputBase, Typography, IconButton, CircularProgress, MenuItem, TextField } from '@material-ui/core'
+import { InputBase, Typography, IconButton, CircularProgress, MenuItem, TextField, Select } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import db from '../../services/firebase'
-import { Done, Settings, Delete, Create } from "@material-ui/icons"
+import { Done, Settings, Delete, Create, List } from "@material-ui/icons"
 import '../../Styles/AdminDashboard.css'
 import SelectFromOnce from './SelectFromOnce'
 import { days } from './AddProgrammingRow'
 
-const pRef = db.collection("Programacion")
+export const pRef = db.collection("Programacion")
 
 const CustomTr = ({edit, ...props}) => {
     const [updateState, setUpdate] = useState({});
@@ -50,10 +50,32 @@ const CustomTr = ({edit, ...props}) => {
                 {edit && <InputBase  color="secondary" name="conductor" onChange={handleInputs} variant="outlined" label="Opcion" placeholder={props.conductor} size="small" />}
             </td>
             <td>
-                {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>{props.streamDay}</Typography>}
-                {edit && <TextField select name="streamDay" size="small" variant="standard" color="secondary" style={{ marginBottom: "10px"}} label="Dia de transmision" defaultValue="lunes" onChange={(e) => handleInputs(e)} fullWidth>
+                {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px", alignItems: "center", display: "flex", flexFlow: "row" }}>{props.streamDay.map((tag) => (
+                    <div style={{ padding: "2.5px", width: "fit-content"}}>
+                        {tag}
+                    </div>
+                ))}</Typography>}
+                {edit && <Select 
+                    multiple 
+                    name="streamDay"
+                    size="small" 
+                    variant="standard" 
+                    color="secondary" 
+                    style={{ marginBottom: "10px"}} 
+                    label="Dia de transmision" 
+                    defaultValue={props.streamDay} 
+                    renderValue={(value) => <div style={{ display: "flex", flexFlow: "row", alignItems: "center"}}>
+                        {value.map((tag) => (
+                            <div style={{ color: "#fff", padding: "2.5px", width: "fit-content", margin: "0 5px", background: "#C93832", borderRadius: "5px"}}>
+                                {tag}
+                            </div>
+                        ))}
+                    </div>}  
+                    onChange={(e) => handleInputs(e)} 
+                    fullWidth
+                >
                     {days.map((day) => <MenuItem value={day}>{day}</MenuItem>)}
-                </TextField>}
+                </Select>}
             </td>
             <td>
                 {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>De {props.time?.from.time} a {props.time?.once.time}</Typography>}
@@ -66,15 +88,20 @@ const CustomTr = ({edit, ...props}) => {
             {!props.hideC && <td>
                 {edit ? 
                     loading ? <CircularProgress color="secondary" /> : <IconButton color="secondary" onClick={handleSubmit}><Done /></IconButton>
-                 : <IconButton color="secondary" onClick={deleteRow}>
+                 : <div>
+                     <IconButton color="secondary" onClick={deleteRow}>
                     <Delete />
-                </IconButton>}
+                    </IconButton>
+                    <IconButton color="secondary" onClick={() => props.togglePP({position: props.position, id: props.id})}>
+                        <List />
+                    </IconButton>
+                </div>}
             </td>}
         </tr>
     )
 }
 
-export default function ProgrammingTable({editMode, closeEditMode, shadow, hideConfig, style}) {
+export default function ProgrammingTable({editMode, closeEditMode, shadow, hideConfig, style, togglePP}) {
     const [Programming, setProgramming] = useState([])
     useEffect(() => {
         pRef.onSnapshot((state) => {
@@ -99,7 +126,7 @@ export default function ProgrammingTable({editMode, closeEditMode, shadow, hideC
             <tbody>
                 {Programming.length > 0 ? 
                     Programming.sort((prev, next) => {
-                        return prev.time?.from?.value - next.time?.from?.value
+                        return prev.position - next.position
                     }).map((td, index) => <CustomTr
                         programName={td.programName} 
                         synopsis={td.synopsis} 
@@ -108,7 +135,9 @@ export default function ProgrammingTable({editMode, closeEditMode, shadow, hideC
                         time={td.time}
                         timeDuration={td.timeDuration}
                         edit={editMode}
+                        togglePP={(num) => togglePP(num)}
                         id={td.id}
+                        position={td.position}
                         hideC={hideConfig}
                         close={closeEditMode}
                         index={index}

@@ -82,7 +82,7 @@ export default function HomePage() {
             {visualModes.navidad && <Particles params={particlesChristmasStyles} style={{ position: "absolute"}}></Particles>}
             {visualModes.aniversario && <Particles params={particlesAnniversaryStyles} style={{ position: "absolute"}}></Particles>}
             <HomeHeader logo={visualModes.logo} pagePosition={0} hHeight={headerHeight} />
-            <div className="homePageContainer" style={{ paddingTop: hheight+40 }}>
+            <div className="homePageContainer" style={{ paddingTop: hheight+10 }}>
                 {Posts.length > 0 ? <CSSTransition
                     in={true}
                     appear={true}

@@ -72,3 +72,34 @@ export const uploadImages = async (img, channel, store, postid, stateF) => {
         })
     })
 }
+
+export const FullWidthImage = async (img, channel, store, postid, stateF) => {
+    const storageRef =  storage.ref(`${store}/${channel}/${postid}`);
+    const metadata = {
+        contentType: "image/png"
+    }
+    return new Promise((resolve, reject) => {
+        const task = storageRef.put(img[0], '', metadata);
+        console.log("entro en la funcion")
+        task.on("state_changed",
+        (snapshot) => {
+            var progress = parseInt(snapshot.task.snapshot.bytesTransferred / snapshot.task.snapshot.totalBytes * 100); 
+            stateF(progress)
+        },
+        (error) => {
+            reject(error)
+        },
+        () => {
+            task.snapshot.ref.getDownloadURL().then((url) => {
+                if(img.length >= 2){
+                    const urls = [];
+                    urls.push(url);
+                    resolve(urls);
+                }
+                else if (img.length == 1){
+                    resolve(url);
+                }
+            })
+        })
+    })
+}
