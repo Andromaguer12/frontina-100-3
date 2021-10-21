@@ -15,6 +15,7 @@ import db, { auth } from '../../services/firebase'
 import { CSSTransition } from 'react-transition-group'
 import SearchPopper from './SearchPopper'
 import LoadingLazySpinner from './loadingLazySpinner'
+import { setNewPage } from '../../services/reduxToolkit/PublicCurrentPage/actions'
 
 const Links = [
     {
@@ -90,7 +91,11 @@ export default function HomeHeader({logo, hHeight, pagePosition, shadow}) {
             console.log(error)   
         })
     }
-    window.addEventListener("scroll", () => {if(Scroll == 0 || Scroll == 1) setScroll(window.scrollY)})
+    window.addEventListener("scroll", () => {
+        if(Scroll == 0 || Scroll == 1){ 
+            setScroll(window.scrollY);
+        }
+    })
     const handleSignOut = () => {
         dispatch(setCurrentUser([null, {
             email: null,
@@ -129,7 +134,7 @@ export default function HomeHeader({logo, hHeight, pagePosition, shadow}) {
                             <Tabs variant='scrollable' style={{ width: "100%"}} scrollButtons="auto" onChange={(e, value) => settabsValue(value)} value={tabsValue} textColor={Scroll === 0 ? "secondary" : "primary"} indicatorColor={Scroll === 0 ? "secondary" : "primary"} >
                                 {
                                     Links.map((link, index) => (
-                                        <Link to={link.link} style={{ textDecoration: "none", color: `${tabsValue === index ? `${Scroll === 0 ? "#C93832" : "#fff"}` : `${Scroll === 0 ? "#7a7a7a" : "#fff"}`}` }}>
+                                        <Link to={link.link} onClick={() => dispatch(setNewPage(index))} style={{ textDecoration: "none", color: `${tabsValue === index ? `${Scroll === 0 ? "#C93832" : "#fff"}` : `${Scroll === 0 ? "#7a7a7a" : "#fff"}`}` }}>
                                             <Tab label={link.label} value={index} style={{ padding: "25px 0"}} />
                                         </Link>
                                     ))

@@ -160,14 +160,14 @@ export default function HomePage() {
                     </div>
                 </Feed>
             </div>
-            <CSSTransition
+            {/* <CSSTransition
                 in={true}
                 appear={true}
                 timeout={1000}
                 classNames="Audio-Comp"
             >
                 <AudioComponent StreamID={StreamID} />
-            </CSSTransition>
+            </CSSTransition> */}
             <CSSTransition
                 in={addComment}
                 timeout={1000}

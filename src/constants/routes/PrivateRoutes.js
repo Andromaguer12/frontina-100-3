@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router'
 import { setAdminUser } from '../../services/reduxToolkit/adminUserLogin/actions';
+import { setNewPage } from '../../services/reduxToolkit/PublicCurrentPage/actions';
 import { setCurrentUser } from '../../services/reduxToolkit/userWithGoogle/actions';
 import { AllRoutes } from './AllRoutes';
     
@@ -13,6 +14,28 @@ const isPublic = (auth, secondary) => auth === "user" && secondary === "any";
 
 export default function PrivateRoutes({route, template, auth, altAuth, component, redirect, userData, ...props}) {
     const dispatch = useDispatch();
+    useEffect(() => {
+        switch (props.path) {
+            case AllRoutes.home:
+                    dispatch(setNewPage(0))
+                break;
+            case AllRoutes.aboutUs:
+                    dispatch(setNewPage(2))
+                break;
+            case AllRoutes.programming:
+                    dispatch(setNewPage(1))
+                break;
+            case AllRoutes.staff:
+                    dispatch(setNewPage(4))
+                break;
+            case AllRoutes.gallery:
+                    dispatch(setNewPage(3))
+                break;
+            default:
+                break;
+        }
+    }, [props.path])
+
     const Layout = template;
 
     if(userData[1].blocked) {

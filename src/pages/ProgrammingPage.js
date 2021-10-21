@@ -47,16 +47,16 @@ export default function ProgrammingPage() {
                     <ProgrammingTable hideConfig={true} style={{ paddingTop: hheight+20, marginBottom: "30px", width: "100%", overflowX: "auto" }} />
                 </div>
             </div>
-            <Hidden xsDown>
+            {/* <Hidden xsDown>
                 <CSSTransition
                     in={true}
                     appear={true}
                     timeout={1000}
                     classNames="Audio-Comp"
                 >
-                    <AudioComponent StreamID={StreamID} />
+                    <AudioComponent StreamID={StreamID} /> 
                 </CSSTransition>
-            </Hidden>
+            </Hidden> */}
         </div>
     )
 }

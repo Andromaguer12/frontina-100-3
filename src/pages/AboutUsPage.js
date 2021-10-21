@@ -143,7 +143,7 @@ export default function AboutUsPage() {
                     </Hidden>
                 </div>
             </div>
-            <AudioComponent StreamID={StreamID} />
+            {/* <AudioComponent StreamID={StreamID} /> */}
         </div>
     )
 }

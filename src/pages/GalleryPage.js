@@ -68,7 +68,7 @@ export default function GalleryPage() {
                 classNames="Content-load"
             >
                 <React.Fragment>
-                    {Departments.length > 0 ? <div className="galleryContent" style={{ paddingTop: hheight+20, marginBottom: "30px", zIndex: "0", boxShadow: '0 0 10px #00000078' }}>
+                    {Departments.length > 0 ? <div className="galleryContent" style={{ paddingTop: hheight+20, marginBottom: "30px", zIndex: "0",  }}>
                         <Hidden xsDown>
                             <Fab onClick={() => setNavigationIndex(NavigationIndex == 0 ? 0 : NavigationIndex-1)}>
                                 <ArrowBackIosOutlined color="secondary" />
@@ -90,7 +90,7 @@ export default function GalleryPage() {
                                                                 </div>
                                                         </Hidden>
                                                     </div>  
-                                                <div className="imggallery" style={{ boxSizing: "border-box", overflow: "auto", boxShadow: "-2px 0 10px #7a7a7a", padding: "20px", height: "70vh", display: "flex", flexFlow: "column", alignItems: "center" }}>
+                                                <div className="imggallery" style={{ boxSizing: "border-box", overflow: "auto", boxShadow: '0 0 10px #00000078', padding: "20px", height: "70vh", display: "flex", flexFlow: "column", alignItems: "center" }}>
                                                     <Hidden xsDown>
                                                         <Typography color="secondary" variant="h4">
                                                             {file.title}
@@ -127,7 +127,7 @@ export default function GalleryPage() {
                     <NewsDots length={Departments} index={NavigationIndex} />
                 </React.Fragment>
             </CSSTransition>
-            <AudioComponent StreamID={StreamID} />
+            {/* <AudioComponent StreamID={StreamID} /> */}
             <CSSTransition
                 in={ImageIndex}
                 timeout={500}

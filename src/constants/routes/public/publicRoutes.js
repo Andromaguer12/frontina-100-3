@@ -3,49 +3,49 @@ import { AllRoutes } from "../AllRoutes"
 
 export const publicRoutes = [
     {
-        component: lazy(() => import('../../../pages/HomePage.js')),
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.home,
         redirect: false,
         exact: true,
         to: AllRoutes.any
     },
     {
-        component: lazy(() => import('../../../pages/AboutUsPage.js')),
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.aboutUs,
         redirect: false,
         exact: true,
         to: AllRoutes.home
     },
     {
-        component: lazy(() => import('../../../pages/GalleryPage.js')),
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.gallery,
         redirect: false,
         exact: true,
         to: AllRoutes.home
     },
     {
-        component: lazy(() => import('../../../pages/ProgrammingPage.js')),
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.programming,
         redirect: false,
         exact: true,
         to: AllRoutes.home
     },
     {
-        component: lazy(() => import('../../../pages/StaffPage.js')),
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.staff,
         redirect: false,
         exact: true,
         to: AllRoutes.home
     },
     {
-        component: lazy(() => import('../../../pages/Blockedpage.js')),
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.blocked,
         redirect: false,
         exact: true,
         to: AllRoutes.home
     },
     {
-        component: lazy(() => import('../../../pages/AdminLogin.js')),
+        component: lazy(() => import("../../../pages/AdminLogin")),
         path: AllRoutes.admin,
         redirect: false,
         exact: true,

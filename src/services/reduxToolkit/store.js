@@ -3,12 +3,14 @@ import thunk from 'redux-thunk'
 import userWithGoogle from "./userWithGoogle/actions"
 import adminUser from "./adminUserLogin/actions"
 import ChatState from "./chatStates/actions"
+import PublicCurrentPages from "./PublicCurrentPage/actions"
 
 
 const AppReducers = {
     userWithGoogle,
     adminUser,
-    ChatState
+    ChatState,
+    PublicCurrentPages
 }
 
 export default configureStore({

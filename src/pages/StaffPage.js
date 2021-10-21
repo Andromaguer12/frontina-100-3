@@ -81,7 +81,7 @@ export default function StaffPage() {
                 </React.Fragment>
             </CSSTransition>
             
-            <AudioComponent StreamID={StreamID} />
+            {/* <AudioComponent StreamID={StreamID} /> */}
             <CSSTransition
                 in={ImageIndex}
                 timeout={500}

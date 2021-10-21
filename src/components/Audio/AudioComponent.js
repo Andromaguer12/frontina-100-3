@@ -43,6 +43,7 @@ function AudioComponent({StreamID}) {
     }, [Timer]) 
 
     useEffect(() => {
+        console.log("render audio")
         if(!Pause) {
             const currentTime = new Date().getTime();
             const timestamp = getDateFromTimestamp(currentTime);

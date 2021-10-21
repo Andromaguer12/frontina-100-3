@@ -20,7 +20,7 @@ export default function ZoomImage({object,image, close}) {
     return (
         <div className="zoomShadow" onClick={close} >
             <Hidden xsDown>
-                {!object && <img src={image} className="zoomimage" style={{ width: `${MoreWidth ? "30%" : "55%" }` }} ref={zoomimage} />}
+                {!object && <img src={image} className="zoomimage" style={{ width: `${MoreWidth ? "55%" : "30%" }` }} ref={zoomimage} />}
             </Hidden>
             <Hidden smUp>
                 {!object && <img src={image} className="zoomimageResponsive" />}
