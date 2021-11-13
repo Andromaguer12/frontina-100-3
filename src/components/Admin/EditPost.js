@@ -1,21 +1,23 @@
 import { Button, CircularProgress, IconButton, MenuItem, TextField, Typography } from '@material-ui/core'
-import { AddPhotoAlternate, ErrorOutline, Image, RepeatRounded } from '@material-ui/icons'
-import React, { useState } from 'react'
+import { AddPhotoAlternate, Edit, ErrorOutline, Image, RepeatRounded } from '@material-ui/icons'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { RANDOMID } from '../../functions/ChatObservers'
 import { handleOptimizedImg, uploadImages } from '../../functions/ImagesFunctions'
 import { useAdminUser } from '../../services/reduxToolkit/adminUserLogin/selectors'
+import { categories } from "../../pages/HomePage"
+
 
 export default function EditPost({cancel, pRef, updateId, variation}) {
     const adminUser = useSelector(useAdminUser);    
-    const [Categorie, setCategorie] = useState("Ultima Hora")
     const [UploadState, setUploadState] = useState(0)
     const [uploadedImgUrl, setuploadedImgUrl] = useState("")
     const [Error, setError] = useState(false)
     const [Uploading, setUploading] = useState(false)
     const [Update, setUpdate] = useState({})
-    const categories = ["Ultima Hora", "Deportes", "Politica", "Economia", "Gastronomia", "Musica", "Tecnologia"]
+    const [EditState, setEditState] = useState(false)
+    const [Categorie, setCategorie] = useState(EditState ? "Ultima Hora" : EditState.contentType)
 
     const handleUpdateObj = (e) => {
         setUpdate({
@@ -42,16 +44,27 @@ export default function EditPost({cancel, pRef, updateId, variation}) {
             }, 3000);
         }
     }
+
+    useEffect(() => {
+        pRef.doc(`${updateId}`).get().then((e) => {
+            setEditState(e.data())
+        })
+    }, [])
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Editar Publicacion</Typography>
-                <form style={{ width: "100%" }} onSubmit={(e) => handleNewPost(e, updateId)}>
-                    {!variation && <TextField name="title" style={{ margin: "10px 0" }} fullWidth color="secondary" onChange={handleUpdateObj}  variant="outlined" label="Titulo" size="small" />}
-                    <TextField select name="contentType" size="small" variant="standard" color="secondary" style={{ marginBottom: "10px"}} label="Categoria" value={Categorie} onChange={(e) => {handleUpdateObj(e); setCategorie(e.target.value)}} fullWidth>
-                        {categories.map((categories) => <MenuItem value={categories}>{categories}</MenuItem>)}
-                    </TextField>
-                    <TextField multiline name="text" style={{ margin: "10px 0" }} onChange={handleUpdateObj} fullWidth color="secondary"  variant="outlined" label="Descripcion" size="small" />
+                {EditState ? <form style={{ width: "100%" }} onSubmit={(e) => handleNewPost(e, updateId)}>
+                    <div style={{ width: "100%", display: "flex", flexFlow: "row", alignItems: "center", justifyContent: "space-between"}}>
+                        {!variation && <TextField helperText="Preferible coloque un numero que no coincida con uno ya asignado" name="position" style={{ margin: "10px 0" }} defaultValue={EditState.position} color="secondary" onChange={(e) => handleUpdateObj(e)}  variant="outlined" label="Posicion" size="small" />}
+                        <TextField select name="contentType" size="small" variant="standard" color="secondary" defaultValue={EditState.contentType} style={{ marginBottom: "10px", width: "50%"}} label="Categoria" value={Categorie} onChange={(e) => {handleUpdateObj(e); setCategorie(e.target.value)}} >
+                            {categories.map((categories) => <MenuItem value={categories}>{categories}</MenuItem>)}
+                        </TextField>
+                    </div>
+                        {!variation && <TextField name="title" style={{ margin: "10px 0" }} defaultValue={EditState.title} fullWidth color="secondary" onChange={handleUpdateObj}  variant="outlined" label="Titulo" size="small" />}
+                    <div style={{ width: "100%", maxHeight: "40vh", overflow: "auto"}}>
+                        <TextField multiline name="text" style={{ margin: "10px 0" }} onChange={handleUpdateObj} defaultValue={EditState.text} fullWidth color="secondary"  variant="outlined" label="Descripcion" size="small" />
+                    </div>
                     <CSSTransition
                         in={Error}
                         timeout={500}
@@ -73,7 +86,9 @@ export default function EditPost({cancel, pRef, updateId, variation}) {
                             </div> : "Aceptar"}
                         </Button>
                     </div>
-                </form>
+                </form> : <div style={{ width: "100%", height: "40vh", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}>
+                    <CircularProgress color="secondary" />
+                </div>}
             </div>
         </div>
     )

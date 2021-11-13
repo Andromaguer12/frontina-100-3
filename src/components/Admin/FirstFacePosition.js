@@ -2,7 +2,7 @@ import { Button, CircularProgress, TextField, Typography } from '@material-ui/co
 import React, { useState } from 'react'
 import { pRef } from './ProgrammingTable'
 
-export default function ProgrammingPositions({cancel, index, id}) {
+export default function FirstFacePositions({cancel, index, pRef, id}) {
     const [NewIndex, setNewIndex] = useState(index)
     const [Error, setError] = useState(false)
     const [Loading, setLoading] = useState(false)
@@ -22,15 +22,15 @@ export default function ProgrammingPositions({cancel, index, id}) {
                     // pRef.doc(docu.id).update({ position: parseInt(index) }).then(() => {
                     pRef.doc(`${id}`).update({
                             position: NewIndex
-                        }).then(() => {
-                            document.getElementById("closeposition").click();
-                        }).catch(() => {
-                            setLoading(false)
-                            setError(true)
-                            setTimeout(() => {
-                                setError(false)
-                            }, 3000);
-                        })
+                    }).then(() => {
+                        document.getElementById("closeposition").click();
+                    }).catch(() => {
+                        setLoading(false)
+                        setError(true)
+                        setTimeout(() => {
+                            setError(false)
+                        }, 3000);
+                    })
                 // })
             // }).catch((error) => console.log(error))
         }
@@ -38,7 +38,7 @@ export default function ProgrammingPositions({cancel, index, id}) {
     return (
         <div className="addShadow">
             <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
-                <Typography variant="h4" color="secondary">Cambiar posicion : {index} a {NewIndex}</Typography>
+                <Typography variant="h4" color="secondary">Cambiar posicion a {NewIndex}</Typography>
                 <form style={{ width: "100%" }} onSubmit={UpdatePosition}>
                     <TextField error={Error} onChange={(e) => setNewIndex(parseInt(e.target.value))} defaultValue={index} type="number" helperText="Asigne una nueva posicion" name="position" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Posicion en la tabla" size="small" />
                     <div style={{ width: '100%', display: "flex", flexFlow: "row", alignItems: "center", justifyContent: "space-between"}}>

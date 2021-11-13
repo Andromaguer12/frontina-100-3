@@ -53,7 +53,7 @@ export default function EditStaffPost({cancel, cRef, editId}) {
     }
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Editar departamento de informacion</Typography>
                 <form style={{ width: "100%" }} onSubmit={handleDepartment}>
                     <TextField name="info" style={{ margin: "10px 0" }} fullWidth color="secondary" multiline variant="outlined" onChange={handleInputs} label="Informacion a comunicar" size="small" />

@@ -14,6 +14,7 @@ import DeletePostFF from '../components/Admin/DeletePostFF'
 import GlobalPosts from '../components/Admin/GlobalPosts'
 import { Functions } from './AdminDashboardPage'
 import PostCLAdmin from '../components/Admin/PostCLAdmin'
+import FirstFacePositions from '../components/Admin/FirstFacePosition'
 
 
 
@@ -24,6 +25,7 @@ export default function AdminPublish() {
     const [Posts, setPosts] = useState([])
     const [Key, setKey] = useState("")
     const [FFedit, setFFedit] = useState(false)
+    const [FFPedit, setFFPedit] = useState(false)
     const [FFdel, setFFdel] = useState(false)
     const [FFadd, setFFadd] = useState(false)
     const [GPadd, setGPadd] = useState(false)
@@ -47,13 +49,13 @@ export default function AdminPublish() {
                 <Typography style={{ fontSize: "14px", margin: "15px 0", width: "100%",  display: "flex", alignItems: "center", flexFlow: "row", justifyContent: "space-between"  }}>
                     Adminitra las Publicaciones, edita, agrega, y elimina, publicaciones de todo tipo!
                 </Typography>
-                <AdminFirstFace pRef={pRef} add={() => setFFadd(!FFadd)} edit={(key) => {setFFedit(!FFedit); setKey(key)}} del={(key) => {setFFdel(!FFdel); setKey(key)}} />
+                <AdminFirstFace pRef={pRef} add={() => setFFadd(!FFadd)} edit={(key) => {setFFedit(!FFedit); setKey(key)}} editP={(key) => {setFFPedit(!FFPedit); setKey(key);}}  del={(key) => {setFFdel(!FFdel); setKey(key)}} />
                 <GlobalPosts seeReviews={(data) => setSeeReviews(data)} pRef={GPRef} add={() => setGPadd(!GPadd)} edit={(key) => {setGPedit(!GPedit); setKey(key)}} del={(key) => {setGPdel(!GPdel); setKey(key)}} />
             </div>
             <CSSTransition
                 in={FFadd}
                 timeout={500}
-                classNames="Zoom-Image"
+                classNames="Zoom-Image2"
                 unmountOnExit
             >
                 <AddFirstFace FullR={true} pRef={pRef} cancel={() => setFFadd(!FFadd)} />
@@ -73,6 +75,14 @@ export default function AdminPublish() {
                 unmountOnExit
             >
                 <EditPost pRef={pRef} updateId={Key} cancel={() => setFFedit(!FFedit)} />
+            </CSSTransition>
+            <CSSTransition
+                in={FFPedit}
+                timeout={500}
+                classNames="Zoom-Image"
+                unmountOnExit
+            >
+                <FirstFacePositions pRef={pRef} id={Key} cancel={() => setFFPedit(!FFPedit)} />
             </CSSTransition>
             <CSSTransition
                 in={GPedit}

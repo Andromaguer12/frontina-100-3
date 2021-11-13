@@ -92,6 +92,9 @@
 .NTR{
     position: relative;
 }
+.ShareDiv{
+    width: 20vw;
+}
 .dots{
     width: fit-content;
     display: flex;
@@ -432,6 +435,9 @@
 
 
 @media screen and (max-width: 600px) {
+    .ShareDiv{
+        width: 90vw;
+    }
     .Programming{
         width: 100%;
     }

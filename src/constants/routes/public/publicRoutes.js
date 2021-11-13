@@ -39,6 +39,13 @@ export const publicRoutes = [
     },
     {
         component: lazy(() => import("../PublicRendering")),
+        path: AllRoutes.post,
+        redirect: false,
+        exact: true,
+        to: AllRoutes.home
+    },
+    {
+        component: lazy(() => import("../PublicRendering")),
         path: AllRoutes.blocked,
         redirect: false,
         exact: true,

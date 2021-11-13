@@ -44,6 +44,8 @@ export default function GlobalPosts({pRef, seeReviews, add, del, edit}) {
                             text={post.text}
                             title={post.title}
                             creator={post.creator}
+                            gpost={true}
+                            position={post.position}
                             contentType={post.contentType}
                             index={PostSelected}
                             del={(key) => del(key)}

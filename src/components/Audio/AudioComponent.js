@@ -26,13 +26,13 @@ function AudioComponent({StreamID}) {
         }
     }, [Volume])
 
-    useEffect(() => {
-        db.collection("Programacion").get().then((state) => {
-            const docs = [];
-            state.forEach((doc) => docs.push({...doc.data(), id: doc.id}))
-            setProgramming(docs)
-        })
-    }, [])
+    // useEffect(() => {
+    //     db.collection("Programacion").get().then((state) => {
+    //         const docs = [];
+    //         state.forEach((doc) => docs.push({...doc.data(), id: doc.id}))
+    //         setProgramming(docs)
+    //     })
+    // }, [])
 
     useEffect(() => {
         if(Timer < 40) {
@@ -43,7 +43,6 @@ function AudioComponent({StreamID}) {
     }, [Timer]) 
 
     useEffect(() => {
-        console.log("render audio")
         if(!Pause) {
             const currentTime = new Date().getTime();
             const timestamp = getDateFromTimestamp(currentTime);
@@ -80,7 +79,8 @@ function AudioComponent({StreamID}) {
                         Listo para reproducir.
                     </Typography>}
                     <Typography color="primary" style={{ fontSize: "12px"  }}>
-                        {Boolean(Program) ? Program.substring(0, 30) : "Programa no registrado" }
+                        Audio En Vivo
+                        {/* {Boolean(Program) ? Program.substring(0, 30) : "Programa no registrado" } */}
                     </Typography>
                     <Typography color="primary" style={{ fontSize: "12px"  }}>
                         Radio Frontina 100.3 FM

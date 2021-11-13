@@ -57,9 +57,9 @@
 .messagecard{
     box-shadow: 1px 3px 5px #acacac;
     width: fit-content;
-    max-width: 75%;
+    /* max-width: 75%; */
     min-height: fit-content;
-    margin: 5px;
+    /* margin: 5px; */
     margin-top: 0;
     margin-bottom: 10px;
     display: flex;

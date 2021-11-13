@@ -3,7 +3,7 @@ import { AddCircleOutline, Edit, ErrorOutline } from '@material-ui/icons'
 import React, { useEffect, useState } from 'react'
 import PostCard from './postCard'
 
-export default function AdminFirstFace({pRef, add, edit, del}) {
+export default function AdminFirstFace({pRef, add, edit, editP, del}) {
     const [Posts, setPosts] = useState([])
     const [PostSelected, setPostSelected] = useState(null)
     const [Timeout, setTimeoutCount] = useState(0)
@@ -36,18 +36,22 @@ export default function AdminFirstFace({pRef, add, edit, del}) {
             </Typography>
             <div className="postfirstfacecontainer">
                 {Posts.length > 0 && 
-                    Posts.map((post, i) => {
+                    Posts.sort((prev, next) => {
+                        return parseInt(prev.position) - parseInt(next.position) 
+                    }).map((post, i) => {
                         return <PostCard 
                             key={post.id}
                             id={post.id}
                             image={post.postImg}
                             text={post.text}
                             title={post.title}
+                            position={post.position}
                             creator={post.creator}
                             contentType={post.contentType}
                             index={PostSelected}
                             del={(key) => del(key)}
                             edit={(key) => {edit(key);}}
+                            editP={(key) => {editP(key);}}
                             i={i}
                             select={(index) => setPostSelected(index)}
                         />

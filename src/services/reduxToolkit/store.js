@@ -16,5 +16,5 @@ const AppReducers = {
 export default configureStore({
     reducer: AppReducers,
     middleware: [thunk],
-    devTools: true
+    devTools: false
 })

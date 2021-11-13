@@ -32,7 +32,7 @@ export default function AddAboutDepartment({cancel}) {
     }
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Añadir nuevo departamento de informacion</Typography>
                 <form style={{ width: "100%" }} onSubmit={handleDepartment}>
                     <TextField name="departName" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Nombre del departamento" size="small" />

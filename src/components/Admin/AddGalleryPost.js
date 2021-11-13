@@ -66,7 +66,7 @@ export default function AddGalleryPost({cancel, gRef}) {
     }
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Publicacion en Galeria</Typography>
                 <form style={{ width: "100%" }} onSubmit={handleUploadPost}>
                     <TextField name="title" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Titulo" size="small" />

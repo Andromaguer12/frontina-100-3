@@ -6,6 +6,7 @@ export const AllRoutes = {
     userLogin: "/login",
     staff: "/staff",
     admin: "/admin/login",
+    posts: "/post",
     adminDashboard: "/admin/dashboard/home",
     adminChat: "/admin/dashboard/customers-chat",
     adminUsers: "/admin/dashboard/user-management",

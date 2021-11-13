@@ -58,6 +58,7 @@ export default function ChatPopUpInput({messagesList, errorMsg, userChatToken, p
                 timestamp: new Date().getTime(),
                 message: form.get("message"),
                 sender: user[0].user.email,
+                senderImg: user[0].user.photoURL,
                 id: msgId,
                 reference: reference()
             })

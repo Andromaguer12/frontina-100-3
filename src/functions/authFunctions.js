@@ -1,33 +1,32 @@
 import db, { auth, googleProvider, rdb, usersRef } from '../services/firebase'
 import { RANDOMID } from './ChatObservers';
 
-export const createNewChannel = async (chatToken, email, name) => {
-    const time = new Date().getTime();
-    const newMsgCount = {
-        adminUser: 1,
-        customer: 0
-    }
-    const chatUsers = {
-        token: chatToken,
-        creator: {
-            email: email,
-            name: name
+export const createNewChannel = async (chatToken) => {
+    return new Promise(async (response, reject) => {
+        const time = new Date().getTime();
+        const newMsgCount = {
+            adminUser: 1,
+            customer: 0
         }
-    }
-    if(chatToken != ""){
-        var ref = rdb.ref(`chats/` + chatToken);
-        await ref.set({
-            firstMessage: {
-                sender: false,
-                timestamp: time,
-                message: "Chat creado, en que podemos ayudarte!"
-            },
-            users: chatUsers,
-            newMsgCount,
-            viewed: false
-        }).then(() => {
-        }).catch(error => console.log(error))             
-    }
+        if(chatToken != ""){
+            var ref = rdb.ref(`chats/` + chatToken);
+            await ref.set({
+                firstMessage: {
+                    sender: false,
+                    timestamp: time,
+                    message: "Chat en vivo!"
+                },
+                // users: chatUsers,
+                newMsgCount,
+                viewed: false
+            }).then(() => {
+                response(true)
+            }).catch(error => {
+                console.log(error)
+                reject(false)
+            })             
+        }
+    })
 }
 
 export const getUserDoc = async (email, name) => {
@@ -41,9 +40,8 @@ export const getUserDoc = async (email, name) => {
                 resolve(obj)
             }
             else{
-                const chatToken = RANDOMID("AXBSAOWHRkahsdhqwijdajpkbko-12937251479", 15);
                 const newUserData = {
-                    chatToken,
+                    chatToken: "dRjaS5X-qqjo9SX",
                     name: name,
                     muted: false,
                     createDate: new Date().getTime(),
@@ -53,7 +51,6 @@ export const getUserDoc = async (email, name) => {
                     secondaryAuth: "any"
                 }
                 usersRef.doc(`${email}`).set(newUserData).then(async () => {
-                    await createNewChannel(chatToken, email, name);
                     await usersRef.doc(`${email}`).get().then((doc) => {
                         var obj = {
                             id: doc.id,

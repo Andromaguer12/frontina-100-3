@@ -18,7 +18,7 @@ export default function DeleteChat({dRef, data, delId, cancel}) {
     }
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Eliminar Chat</Typography>
                 <div style={{ width: '100%', display: "flex", flexFlow: "row", alignItems: "center", justifyContent: "space-between"}}>
                     <Button color="secondary" variant="outlined" onClick={cancel}>

@@ -57,8 +57,10 @@ export default function ChatPopUp() {
     const handleNewChat = async () => {
         const chatToken = RANDOMID("AXBSAOWHRkahsdhqwijdajpkbko-12937251479", 15);
         setLoading(true)
-        await createNewChannel(chatToken, `Usuario ${chatToken}`, `Usuario ${chatToken}`).then(() => {
-            setLoading(false)
+        // await createNewChannel(chatToken, `Usuario ${chatToken}`, `Usuario ${chatToken}`).then(() => {
+            setTimeout(() => {
+                setLoading(false)
+            }, 200);
             dispatch(setCurrentUser([
                 {
                     user: {
@@ -68,13 +70,14 @@ export default function ChatPopUp() {
                     }
                 },
                 {
-                    chatToken: chatToken,
+                    id: `Usuario ${chatToken}`,
+                    chatToken: "dRjaS5X-qqjo9SX",
                     name: `Usuario ${chatToken}`
 
                 }
             ]))
-            setCreatedChat(true)
-        });
+        //     setCreatedChat(true)
+        // });
     }
     const handleLogIn = async (e) => {
         //execute the login
@@ -127,7 +130,7 @@ export default function ChatPopUp() {
         <div className="ChatPdiv" >
             {googleUser.currentUser[0] == null ? <React.Fragment>
                 <Typography variant="h4" style={{ width: "95%", borderBottom: "1px dotted #7a7a7a", boxSizing: "border-box", color: "#7a7a7a", display: 'flex', flexFlow: "row", alignItems: "center", justifyContent: "space-between"}}>
-                    Chat Directo
+                    Chat en Vivo
                 </Typography>
                 <img src={chatIcon} style={{ width: "30%" }} />
                 <Popper open={open} anchorEl={anchorEl} placement="top">
@@ -163,6 +166,7 @@ export default function ChatPopUp() {
                         messagesList[0]?.messages?.map((msg) => (
                             <MessageCard 
                                 key={msg.id}
+                                senderimg={msg.senderImg}
                                 timestamp={msg.timestamp}
                                 sender={msg.sender}
                                 message={msg.message}

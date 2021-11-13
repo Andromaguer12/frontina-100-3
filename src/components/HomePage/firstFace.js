@@ -45,7 +45,9 @@ export default function FirstFace({data}) {
                 <Hidden smUp>
                     <AutoPlaySwipeableViews interval={7500} index={NavigationIndex} onChangeIndex={(index) => setNavigationIndex(index)} enableMouseEvents style={{ width: "90%", boxSizing: "border-box", alignItems: "center"}}>
                         {
-                            data.map((card) => {
+                            data.sort((prev, next) => {
+                                return parseInt(prev.position) - parseInt(next.position)
+                            }).map((card) => {
                                 return <div key={card.id} style={{ width: "100%", display: 'flex', flexFlow: "column", alignItems: "center", justifyContent: "center"}}>
                                             <div className="FFcardResponsive">
                                                 <img src={card.postImg} className="responsiveFFImage" style={{ borderRadius: "10px 10px 0 0"}} />

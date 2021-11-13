@@ -1,8 +1,8 @@
 import { Button, IconButton, Typography } from '@material-ui/core'
-import { Delete, Edit, RateReviewOutlined, ThumbUpOutlined } from '@material-ui/icons'
+import { Delete, Edit, FormatListNumbered, ListAlt, RateReviewOutlined, ThumbUpOutlined } from '@material-ui/icons'
 import React from 'react'
 
-export default function PostCard({id, seeData, likes, comments, creator, image, text, title, contentType, index, i, select, edit, del}) {
+export default function PostCard({id, seeData, gpost, position, likes, comments, creator, image, text, title, contentType, index, i, select, edit, editP, del}) {
     const handleSeeReviews = () => {
         seeData({
             in: true,
@@ -20,11 +20,15 @@ export default function PostCard({id, seeData, likes, comments, creator, image, 
                 <IconButton size="medium" color="primary" onClick={() => edit(id)}>
                     <Edit />
                 </IconButton>
+                {!gpost && <IconButton size="medium" color="primary" onClick={() => editP(id)}>
+                    <FormatListNumbered />
+                </IconButton>}
             </div>}
             {index === i && <div className="postData">
                 {!comments && <Typography className="postTags" >Titulo: {title}</Typography>}
                 <Typography className="postTags">Texto: {text}</Typography>
                 <Typography className="postTags">Creador: {creator.name}</Typography>
+                <Typography className="postTags" >#: {position}</Typography>
                 <Typography>Categoria: {contentType}</Typography>
                 {comments && <div style={{ width: "100%", display: "flex", alignItems: "center", flexFlow: "row"}}>
                     <ThumbUpOutlined />: <Typography>{likes.length}</Typography>
@@ -34,6 +38,7 @@ export default function PostCard({id, seeData, likes, comments, creator, image, 
             </div>}
             {index !== i && !comments && <div className="postData">
                 <Typography className="postTags" >Titulo: {title}</Typography>
+                <Typography className="postTags" >#: {position}</Typography>
             </div>}
             {index !== i && comments && <div className="postData">
                 <Typography className="postTags" >Descripcion: {text}</Typography>

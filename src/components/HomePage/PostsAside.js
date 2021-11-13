@@ -2,7 +2,7 @@ import { IconButton, InputBase, Typography } from '@material-ui/core'
 import { Chat, Clear, FilterListOutlined, Search } from '@material-ui/icons'
 import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import ChatPopUp from '../Chat/ChatPopUp'
+// import ChatPopUp from '../Chat/ChatPopUp'
 import AsideSearchPopper from './AsideSearchPopper'
 
 export default function PostsAside({chatDinamic, postData, tabsF}) {
@@ -34,14 +34,14 @@ export default function PostsAside({chatDinamic, postData, tabsF}) {
                     </IconButton>}
                 </div>
             </div>
-            <CSSTransition
+            {/* <CSSTransition
                 in={chatDinamic}
                 timeout={1000}
                 classNames="Chat-Load"
                 unmountOnExit
             >
                 <ChatPopUp fixed={chatDinamic} />
-            </CSSTransition>
+            </CSSTransition> */}
         </div>
     )
 }

@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group'
 import { RANDOMID } from '../../functions/ChatObservers'
 import { FullWidthImage, handleOptimizedImg, uploadImages } from '../../functions/ImagesFunctions'
 import { useAdminUser } from '../../services/reduxToolkit/adminUserLogin/selectors'
+import { categories } from "../../pages/HomePage"
 
 export default function AddFirstFace({pRef, cancel, variation, FullR}) {
     const adminUser = useSelector(useAdminUser);    
@@ -27,7 +28,6 @@ export default function AddFirstFace({pRef, cancel, variation, FullR}) {
             })
         })
     }
-    const categories = ["Ultima Hora", "Deportes", "Politica", "Economia", "Gastronomia", "Musica", "Tecnologia"]
 
     const handleNewPost = async (e, id, imageUrl) => {
             const form = new FormData(e.target);   
@@ -38,6 +38,7 @@ export default function AddFirstFace({pRef, cancel, variation, FullR}) {
                 postImg: imageUrl,
                 timestamp: new Date().getTime(),
                 likes: 0,
+                position: form.get("position"),
                 likedBy: [],
                 comments: variation ? [] : null,
                 creator: {
@@ -55,7 +56,7 @@ export default function AddFirstFace({pRef, cancel, variation, FullR}) {
     const handleUploadPost = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        const array = [form.get("title"), form.get("text")];
+        const array = [form.get("title"), form.get("text"), form.get("position")];
         const verification = []
         const newPostID = RANDOMID('AaBbNnJjHhGgTtYyCcDd123456789', 15);
         array.forEach((input) => {
@@ -93,23 +94,30 @@ export default function AddFirstFace({pRef, cancel, variation, FullR}) {
     }
 
     return (
-        <div className="addShadow">
-            <div className="divAddRow">
+        <div className="addShadow" style={{ padding: "0", justifyContent: "flex-end", boxSizing: "border-box"}}>
+            <div className="divAddRow"  >
                 <Typography variant="h4" color="secondary">{variation ? "Publicacion Global" : "Publicacion de Primera Plana"}</Typography>
-                <form style={{ width: "100%" }} onSubmit={handleUploadPost}>
-                    {!variation && <TextField name="title" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Titulo" size="small" />}
-                    <TextField select name="categorie" size="small" variant="standard" color="secondary" style={{ marginBottom: "10px"}} label="Categoria" value={Categorie} onChange={(e) => setCategorie(e.target.value)} fullWidth>
-                        {categories.map((categories) => <MenuItem value={categories}>{categories}</MenuItem>)}
-                    </TextField>
-                    <div style={{ backgroundImage: `url(${ImgSelec.length > 0 ? ImgSelec[0] : "" })`, backgroundSize: "cover", backgroundColor: "#e7e7e7", width: "100%", borderRadius: "10px", display: "flex", alignItems: "center", flexFlow: "column", justifyContent: "center"}}>
-                        <input type="file" hidden="hidden" id="inputImg" onChange={FullR ? (e) => {setuMImages(Array.from(e.target.files)); OptimizeImage(e)} :  (e) => OptimizeImage(e) } />
-                        <IconButton style={{ color: "#7a7a7a", margin: "100px" }} onClick={() => {
-                            document.getElementById("inputImg").click();
-                        }}>
-                            {ImgSelec.length == 0 ? <AddPhotoAlternate style={{ fontSize: "50" }} /> : <RepeatRounded style={{ fontSize: "50" }} />}    
-                        </IconButton>
+                <form style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", flexFlow: "column", height: "100%"  }} onSubmit={handleUploadPost}>
+                    <div style={{ width: "100%", display: "flex", flexFlow: "row", alignItems: "center", justifyContent: "space-between"}}>
+                        <div style={{ width: '50%'}}>
+                            {!variation && <TextField type="number" helperText="Preferible coloque un numero que no coincida con uno ya asignado" name="position" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Posicion" size="small" />}
+                            {!variation && <TextField name="title" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Titulo" size="small" />}
+                            <TextField select name="categorie" size="small" variant="standard" color="secondary" style={{ marginBottom: "10px"}} label="Categoria" value={Categorie} onChange={(e) => setCategorie(e.target.value)} fullWidth>
+                                {categories.map((categories) => <MenuItem value={categories}>{categories}</MenuItem>)}
+                            </TextField>
+                        </div>
+                        <div style={{ backgroundImage: `url(${ImgSelec.length > 0 ? ImgSelec[0] : "" })`, margin: "10px 0", backgroundSize: "cover", backgroundColor: "#e7e7e7", width: "40%", borderRadius: "10px", display: "flex", alignItems: "center", flexFlow: "column", justifyContent: "center"}}>
+                            <input type="file" hidden="hidden" id="inputImg" onChange={FullR ? (e) => {setuMImages(Array.from(e.target.files)); OptimizeImage(e)} :  (e) => OptimizeImage(e) } />
+                            <IconButton style={{ color: "#7a7a7a", margin: "100px" }} onClick={() => {
+                                document.getElementById("inputImg").click();
+                            }}>
+                                {ImgSelec.length == 0 ? <AddPhotoAlternate style={{ fontSize: "50" }} /> : <RepeatRounded style={{ fontSize: "50" }} />}    
+                            </IconButton>
+                        </div>
                     </div>
-                    <TextField multiline name="text" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Descripcion" size="small" />
+                    <div style={{ width: "100%", maxHeight: "30vh", overflow: "auto"}}>
+                        <TextField multiline name="text" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Descripcion" size="small" />
+                    </div>
                     <CSSTransition
                         in={Error}
                         timeout={500}

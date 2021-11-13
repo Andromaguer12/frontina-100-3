@@ -9,6 +9,7 @@ const AboutUs = lazy(() => import("../../pages/AboutUsPage"))
 const StaffPage = lazy(() => import("../../pages/GalleryPage"))
 const ProgrammingPage = lazy(() => import("../../pages/ProgrammingPage"))
 const GalleryPage = lazy(() => import("../../pages/StaffPage"))
+const PostView = lazy(() => import("../../pages/PostView"))
 
 const Pages = [
     HomePage,
@@ -16,6 +17,7 @@ const Pages = [
     AboutUs, 
     StaffPage,
     GalleryPage,
+    PostView
 ]
 
 export default function PublicRendering() {

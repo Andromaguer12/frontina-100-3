@@ -8,9 +8,11 @@ import { useAdminUser } from './services/reduxToolkit/adminUserLogin/selectors';
 import { useSelector } from 'react-redux';
 import { rdb } from "./services/firebase"
 import AudioComponent from './components/Audio/AudioComponent';
+import { AllRoutes } from './constants/routes/AllRoutes'
 
 export default function AppIndex() {
   const user = useSelector(useAdminUser);
+  const [ShowAudio, setShowAudio] = useState(true)
   const [StreamID, setStreamID] = useState({});
     const streamRef = rdb.ref().child('/streamID');
     
@@ -18,6 +20,14 @@ export default function AppIndex() {
         streamRef.on("value", (id) => {
             setStreamID(id.val())
         })
+        if(window.location.pathname.includes(AllRoutes.admin)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminChat)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminDashboard)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminInfo)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminProgramming)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminPublish)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminSponsors)) setShowAudio(false)
+        if(window.location.pathname.includes(AllRoutes.adminUsers)) setShowAudio(false)
     }, [])
   return (
     <BrowserRouter>
@@ -49,7 +59,7 @@ export default function AppIndex() {
             <Route path="/" component={NotFound} />
         </Switch>
       </Suspense>
-      <AudioComponent StreamID={StreamID} />
+      {ShowAudio && <AudioComponent StreamID={StreamID} />}
     </BrowserRouter>
   )
 }

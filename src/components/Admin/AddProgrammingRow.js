@@ -38,7 +38,7 @@ export default function AddProgrammingRow({cancel}) {
     }
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Agregar Fila</Typography>
                 <form style={{ width: "100%" }} onSubmit={handleNewRow}>
                     <TextField type="number" helperText="Preferible coloque un numero que no coincida con uno ya asignado" name="position" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Posicion en la tabla" size="small" />

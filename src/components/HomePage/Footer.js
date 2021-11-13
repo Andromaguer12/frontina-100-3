@@ -35,7 +35,7 @@ export default function Footer() {
                 <img src={image} className="footerLogo" />
                 <div style={{ width: "80%", marginLeft: "10px"}}>
                     <Typography variant="h6" color="primary" className="footerText">Copyright {new Date().getFullYear()} Frontina 100.3 FM | Radio Comunitaria</Typography>
-                    <Typography variant="h6" color="primary" className="footerText">Powered by Andromaguer122</Typography>
+                    <Typography variant="h6" color="primary" className="footerText">Sitio web creado por Andres Carrasquero | Contacto: andresj172020@gmail.com +584247498567</Typography>
                     <Hidden xsDown>
                         <div className="sponsorsFooterDiv">
                             <Typography  color="primary" style={{ margin: "5px 0", display: "flex", alignItems: "center", flexFlow: "row" }}>Patrocinadores <ApartmentOutlined /> </Typography>

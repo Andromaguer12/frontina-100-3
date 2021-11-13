@@ -18,7 +18,8 @@ import {particlesChristmasStyles, particlesAnniversaryStyles} from '../Styles/pa
 import { yellow } from '@material-ui/core/colors'
 import SeeMore from '../components/HomePage/SeeMore'
 
-export const categories = ["Ultima Hora", "Deportes", "Politica", "Economia", "Gastronomia", "Musica", "Tecnologia"]
+export const categories = ["Ultima Hora", "Politica", "Economia", "Tecnologia", "Internacional", "Espectaculo", "Deportes", "Gastronomia"]
+export const GPref = db.collection("Publicaciones").doc('global').collection("cont");
 
 export default function HomePage() {
     const [hheight, sethheight] = useState(0)
@@ -30,7 +31,6 @@ export default function HomePage() {
     const [Posts, setPosts] = useState([]);
     const [GPosts, setGPosts] = useState([]);
     const pRef = db.collection("Publicaciones").doc('firstFace').collection("cont");
-    const GPref = db.collection("Publicaciones").doc('global').collection("cont");
     const [addComment, setaddComment] = useState(false)
     const [PostKey, setPostKey] = useState("")
     const [CurrentComments, setCurrentComments] = useState([])
@@ -97,13 +97,11 @@ export default function HomePage() {
                 <Feed>
                     <div className="postsContainer">
                             <Tabs style={{ width: "100%", boxSizing: "border-box" }} variant="scrollable" value={tabsValue} onChange={(e, newValue) => setTabsValue(newValue)} textColor="secondary" indicatorColor="secondary" scrollButtons="auto" >
-                                <Tab label="Ultima Hora" value={0} style={{ padding: "25px 0"}} />
-                                <Tab label="Deportes" value={1} />
-                                <Tab label="Politica" value={2} />
-                                <Tab label="Economia" value={3} />
-                                <Tab label="Gastronomia" value={4} />
-                                <Tab label="Musica" value={5} />
-                                <Tab label="Tecnologia" value={6} />
+                                {
+                                    categories.map((c, index) => (
+                                        <Tab label={c} value={index} />
+                                    ))
+                                }
                             </Tabs>
                                 <React.Fragment>
                                     <div style={{ width: "100%" }}>
@@ -119,7 +117,9 @@ export default function HomePage() {
                                                     <Feed choosedContent={true} value={tabsValue} index={index}>
                                                         {GPosts.filter((post) => post.contentType === cate).length >= 1 ? 
                                                             <React.Fragment>
-                                                                {GPosts.filter((post) => post.contentType === cate).map((postdata) => {
+                                                                {GPosts.filter((post) => post.contentType === cate).sort((p, n) => {
+                                                                    return p.timestamp - n.timestamp
+                                                                }).reverse().map((postdata) => {
                                                                     return (
                                                                             <Suspense fallback={<div style={{ width: "100%", height: "40vh", boxSizing: "border-box", display: "flex", flexFlow: "column", alignItems: "center", justifyContent: "center" }}>
                                                                                 <CircularProgress color="secondary" />
@@ -128,6 +128,7 @@ export default function HomePage() {
                                                                                         addCommentF={(key, comments) => {setaddComment(!addComment); setPostKey(key); setCurrentComments(comments)}}
                                                                                         id={postdata.id}
                                                                                         GPref={GPref} 
+                                                                                        position={postdata.position}
                                                                                         likedBy={postdata.likedBy}
                                                                                         imgData={postdata.postImg}
                                                                                         likes={postdata.likes}

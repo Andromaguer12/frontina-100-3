@@ -14,6 +14,7 @@ import { currentChatList, currentMessagesList, useCurrentChatID } from '../servi
 import { Functions } from './AdminDashboardPage'
 import { rdb } from '../services/firebase'
 import DeleteChat from '../components/Chat/DeleteChat'
+import AdminChatDashboard from '../components/Chat/AdminChatDashboard'
 
 
 export default function AdminChat() {
@@ -25,27 +26,28 @@ export default function AdminChat() {
 
     const dispatch = useDispatch();
 
-    const updateChatList = (result) => {
-        dispatch(setChatsList(result));
-    }
-    const updateChatMessages = () => {
-        getChatMessages((result) => {
-            dispatch(setAllMessages(result));
-        })
-    }
+    // const updateChatList = (result) => {
+    //     dispatch(setChatsList(result));
+    // }
+    // const updateChatMessages = () => {
+    //     getChatMessages((result) => {
+    //         dispatch(setAllMessages(result));
+    //     })
+    // }
 
-    useEffect(() => {
-        setChatsObs(updateChatList);
-    }, [])
+    // useEffect(() => {
+    //     setChatsObs(updateChatList);
+    // }, [])
 
     return (
         <div className="admindashcontent">
             <AdminDrawer Functions={Functions} />
-            <div className="layoutdisplay" style={{ justifyContent: "flex-start", flexFlow: "row", alignItems: "center"}}>
-                <AdminChatList data={ChatList} updateChatMessages={updateChatMessages} delChat={(key) => setdelId({id: key, in: true})} />
-                <AdminMessagesView messagesList={CurrentMessagesList()} chatUp={updateChatMessages} />
+            <div className="layoutdisplay" style={{ justifyContent: "flex-start", flexFlow: "column", padding: "20px", alignItems: "center"}}>
+                {/* <AdminChatList data={ChatList} updateChatMessages={updateChatMessages} delChat={(key) => setdelId({id: key, in: true})} /> */}
+                {/* <AdminMessagesView messagesList={CurrentMessagesList()} chatUp={updateChatMessages} /> */}
+                <AdminChatDashboard />
             </div>
-            {delId.in && <DeleteChat data={ChatList.length} dRef={rdb.ref(`chats/`)} delId={delId.id} cancel={() => setdelId({id: "", in: false})} />}
+            {/* {delId.in && <DeleteChat data={ChatList.length} dRef={rdb.ref(`chats/`)} delId={delId.id} cancel={() => setdelId({id: "", in: false})} />} */}
         </div>
     )
 }

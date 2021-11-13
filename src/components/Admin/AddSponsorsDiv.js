@@ -8,7 +8,6 @@ import { handleOptimizedImg, uploadImages } from '../../functions/ImagesFunction
 import db from '../../services/firebase'
 import { useAdminUser } from '../../services/reduxToolkit/adminUserLogin/selectors'
 
-
 export default function AddSponsorsDiv({cancel}) {
     const adminUser = useSelector(useAdminUser);    
     const [Categorie, setCategorie] = useState("Ultima Hora")
@@ -29,7 +28,6 @@ export default function AddSponsorsDiv({cancel}) {
             })
         })
     }
-    const categories = ["Ultima Hora", "Deportes", "Politica", "Economia", "Gastronomia", "Musica", "Tecnologia"]
 
     const handleNewPost = (e, id, imageUrl) => {
         e.preventDefault();
@@ -68,7 +66,7 @@ export default function AddSponsorsDiv({cancel}) {
     }
     return (
         <div className="addShadow">
-            <div className="divAddRow">
+            <div className="divAddRow" style={{ width: "80%", height: "fit-content", borderRadius: "10px"}}>
                 <Typography variant="h4" color="secondary">Añadir Patrocinador o socio</Typography>
                 <form style={{ width: "100%" }} onSubmit={handleUploadPost}>
                     <TextField name="name" style={{ margin: "10px 0" }} fullWidth color="secondary"  variant="outlined" label="Nombre del patrocinador" size="small" />

@@ -34,6 +34,7 @@ export default function PrivateRoutes({route, template, auth, altAuth, component
             default:
                 break;
         }
+        if(window.location.href.includes(AllRoutes.posts)) dispatch(setNewPage(5))
     }, [props.path])
 
     const Layout = template;

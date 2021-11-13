@@ -88,11 +88,13 @@
     z-index: 2;
 }
 .divAddRow{
-    margin: 20px 0;
-    width: 45%;
+    /* margin: 20px 0; */
+    width: 100%;
+    box-sizing: border-box;
+    height: 90%;
     background: #fff;
     padding: 15px 35px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     display: flex;
     flex-flow: column;
     align-items: center;

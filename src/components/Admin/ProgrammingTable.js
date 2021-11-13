@@ -37,6 +37,9 @@ const CustomTr = ({edit, ...props}) => {
     return (
         <tr style={{ background: `${props.index % 2 == 0 ? "#e7e7e7": "#fff"}`}}>
             <SelectFromOnce close={() => setanchorEl(null)} open={open} anchorEl={anchorEl} handleChange={(e) => handleInputs(e)} />
+            {/* <td style={{ width: "5%"}}>
+                {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>{props.position}</Typography>}
+            </td> */}
             <td>
                 {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px" }}>{props.programName}</Typography>}
                 {edit && <InputBase className color="secondary" name="programName"  onChange={handleInputs} variant="outlined" label="Opcion" placeholder={props.programName} size="small" />}
@@ -50,7 +53,7 @@ const CustomTr = ({edit, ...props}) => {
                 {edit && <InputBase  color="secondary" name="conductor" onChange={handleInputs} variant="outlined" label="Opcion" placeholder={props.conductor} size="small" />}
             </td>
             <td>
-                {!edit && <Typography style={{ width: "fit-content", color:"#7a7a7a", fontSize: "14px", alignItems: "center", display: "flex", flexFlow: "row" }}>{props.streamDay.map((tag) => (
+                {!edit && <Typography style={{ width: "100%", color:"#7a7a7a", fontSize: "14px", alignItems: "center", display: "flex", flexFlow: "row wrap", alignContent: "center", alingItems: "center" }}>{props.streamDay.map((tag) => (
                     <div style={{ padding: "2.5px", width: "fit-content"}}>
                         {tag}
                     </div>
@@ -64,13 +67,13 @@ const CustomTr = ({edit, ...props}) => {
                     style={{ marginBottom: "10px"}} 
                     label="Dia de transmision" 
                     defaultValue={props.streamDay} 
-                    renderValue={(value) => <div style={{ display: "flex", flexFlow: "row", alignItems: "center"}}>
+                    renderValue={(value) => <td style={{ display: "flex", flexFlow: "row", alignItems: "center"}}>
                         {value.map((tag) => (
                             <div style={{ color: "#fff", padding: "2.5px", width: "fit-content", margin: "0 5px", background: "#C93832", borderRadius: "5px"}}>
                                 {tag}
                             </div>
                         ))}
-                    </div>}  
+                    </td>}  
                     onChange={(e) => handleInputs(e)} 
                     fullWidth
                 >
@@ -114,6 +117,7 @@ export default function ProgrammingTable({editMode, closeEditMode, shadow, hideC
         <table style={{ boxShadow: `${shadow ? "2px 2px 5px #00000078" : ""}`, borderRadius: "10px", ...style}} className="programmingtable">
             <thead>
                 <tr style={{ background: "#fff", borderRadius: "10px 10px 0 0", width: "100%" }}>
+                    {/* <td style={{ width: "5%"}}><Typography style={{ width: "fit-content" }}>#</Typography></td> */}
                     <td><Typography style={{ width: "fit-content" }}>Nombre</Typography></td>
                     <td><Typography style={{ width: "fit-content" }}>Sinopsis</Typography></td>
                     <td><Typography style={{ width: "fit-content" }}>Conductor(a)</Typography></td>
