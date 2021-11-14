@@ -4,11 +4,11 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { RANDOMID } from '../../functions/ChatObservers'
-import { handleOptimizedImg, uploadImages } from '../../functions/ImagesFunctions'
+import { FullWidthImage, handleOptimizedImg, uploadImages } from '../../functions/ImagesFunctions'
 import db from '../../services/firebase'
 import { useAdminUser } from '../../services/reduxToolkit/adminUserLogin/selectors'
 
-export default function AddSponsorsDiv({cancel}) {
+export default function AddSponsorsDiv({cancel, FullR}) {
     const adminUser = useSelector(useAdminUser);    
     const [Categorie, setCategorie] = useState("Ultima Hora")
     const [UploadState, setUploadState] = useState(0)
@@ -29,40 +29,65 @@ export default function AddSponsorsDiv({cancel}) {
         })
     }
 
-    const handleNewPost = (e, id, imageUrl) => {
+    const handleNewPost = async (e, id, imageUrl) => {
         e.preventDefault();
-        const form = new FormData(e.target);       
-        if(form.get("name") != ""){
-            sRef.doc(`${id}`).set({
-                sponsorImg: imageUrl,
-                name: form.get("name"),
-                creator: {
-                    name: adminUser[1].name,
-                    email: adminUser[1].id,
-                    img: adminUser[1].img,
-                    skills: adminUser[1].skills
-                }
-            }).then(() => {
-                setUploading(false);
-                cancel();
-            })
-        }
+        const form = new FormData(e.target);
+        await sRef.doc(`${id}`).set({
+            sponsorImg: imageUrl,
+            name: form.get("name"),
+            creator: {
+                name: adminUser[1].name,
+                email: adminUser[1].id,
+                img: adminUser[1].img,
+                skills: adminUser[1].skills
+            }
+        }).then(() => {
+            setUploading(false);
+            cancel();
+        })
+        setTimeout(() => {
+            cancel();    
+        }, 3000);
     }
 
     const handleUploadPost = async (e) => {
         e.preventDefault();
-        setUploading(true);
+        const form = new FormData(e.target);
+        const array = [form.get("name")];
+        const verification = []
         const newPostID = RANDOMID('AaBbNnJjHhGgTtYyCcDd123456789', 15);
-        await uploadImages(ImgSelec, "Sponsors", "Global", newPostID, (newvalue) => setUploadState(newvalue)).then((url) => {
-            setUploadState(100)
-            handleNewPost(e, newPostID, url)
-        }).catch(() => {
-            setUploading(false);
-            setError(true);
-            setTimeout(() => {
-                setError(false)
-            }, 3000);
-        })
+        array.forEach((input) => {
+            if(input === ""){
+                verification.push(true);
+            }
+        }) 
+        if(ImgSelec.length == 0) verification.push(true); 
+        if(verification.length === 0 && !FullR){
+            setUploading(true);
+            await uploadImages(ImgSelec, "Sponsors", "Global", newPostID, (newvalue) => setUploadState(newvalue)).then((url) => {
+                setUploadState(100)
+                handleNewPost(e, newPostID, url)
+            }).catch(() => {
+                setUploading(false);
+                setError(true);
+                setTimeout(() => {
+                    setError(false)
+                }, 3000);
+            })
+        }
+        // else if(verification.length === 0 && FullR) {
+        //     setUploading(true);
+        //     await FullWidthImage(uMImages, "Sponsors", "Global", newPostID, (newvalue) => setUploadState(newvalue)).then((url) => {
+        //         setUploadState(100)
+        //         handleNewPost(e, newPostID, url)
+        //     }).catch(() => {
+        //         setUploading(false);
+        //         setError(true);
+        //         setTimeout(() => {
+        //             setError(false)
+        //         }, 3000);
+        //     })
+        // }
     }
     return (
         <div className="addShadow">

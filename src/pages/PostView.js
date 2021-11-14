@@ -64,7 +64,7 @@ export default function PostView() {
     }
     return (
         <div style={{ display: "flex", flexFlow: "column", alignItems: "center", width: "100%", height: "100vh", backgroundImage: `url(${visualModes.navidad ? "" : fondo})`, backgroundColor: `${visualModes.navidad ? "#b8b8b8" : "yellow"}`, backgroundBlendMode: `${visualModes.aniversario ? "hard-light" : ""}` }}>
-            <HomeHeader logo={visualModes.logo} pagePosition={3} hHeight={headerHeight} />
+            <HomeHeader logo={visualModes.logo} pagePosition={null} hHeight={headerHeight} />
             {visualModes.navidad && <Particles params={particlesChristmasStyles} style={{ position: "absolute", left: "0", zIndex: "0"}}></Particles>}
             {visualModes.aniversario && <Particles params={particlesAnniversaryStyles} style={{ position: "absolute", left: "0", zIndex: "0"}}></Particles>}
             <div style={{ paddingTop: hheight+10, paddingBottom: hheight+10, width: "95%", display: "flex", flexFlow: "column", alignItems: "center", }}>

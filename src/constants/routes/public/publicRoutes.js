@@ -39,9 +39,9 @@ export const publicRoutes = [
     },
     {
         component: lazy(() => import("../PublicRendering")),
-        path: AllRoutes.post,
+        path: AllRoutes.posts,
         redirect: false,
-        exact: true,
+        exact: false,
         to: AllRoutes.home
     },
     {

@@ -24,7 +24,7 @@ export default function AdminSponsors() {
             <div className="layoutdisplay" style={{ padding: "20px", overflowY: "auto" }}>                
                 <Sponsors toggleAdd={() => setAddSponsor(true)} toggleDelete={(e) => {setDeleteS(true); setDeleteId(e)}} />
             </div>
-            {AddSponsor && <AddSponsorsDiv cancel={() => setAddSponsor(false)} />}
+            {AddSponsor && <AddSponsorsDiv FullR={false} cancel={() => setAddSponsor(false)} />}
             {DeleteS && <DeletePostFF pRef={db.collection("Sponsors")} delId={DeleteId} cancel={() => setDeleteS(false)} />}
         </div>
     )

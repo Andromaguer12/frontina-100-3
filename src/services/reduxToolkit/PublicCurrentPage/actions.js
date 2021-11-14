@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    TabValue: 0
+    TabValue: null
 };
 
 const PublicCurrentPages = createSlice({
