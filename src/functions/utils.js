@@ -37,6 +37,17 @@ export const WeekDay = (weekday) => {
     else return false
 }
 
+
+export const removeAllAccents = (string) => {
+    var lettersA = ['á', 'é', 'í', 'ó', 'ú']
+    var letters = ['a', 'e', 'i', 'o', 'u']
+    var newString = string
+    letters.forEach((letter, index) => {
+        newString = newString.replace(lettersA[index], letter)
+    })
+    return newString
+}
+
 export const findDateValue = (time) => {
     const state = {
         hour: time.substring(0, 2),

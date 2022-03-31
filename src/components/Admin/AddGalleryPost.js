@@ -35,7 +35,6 @@ export default function AddGalleryPost({cancel, gRef}) {
                 verification.push(true);
             }
         })
-        console.log(verification.length)        
         if(verification.length === 0){
             setUploadState(100)
             gRef.doc(`${id}`).set({

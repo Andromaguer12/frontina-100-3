@@ -18,7 +18,7 @@ import {particlesChristmasStyles, particlesAnniversaryStyles} from '../Styles/pa
 import { yellow } from '@material-ui/core/colors'
 import SeeMore from '../components/HomePage/SeeMore'
 
-export const categories = ["Ultima Hora", "Politica", "Economia", "Tecnologia", "Internacional", "Espectaculo", "Deportes", "Gastronomia"]
+export const categories = ["Ultima Hora", "Politica", "Economia", "Ciencia y Tecnologia", "Internacional", "Espectaculo", "Deportes", "Gastronomia"]
 export const GPref = db.collection("Publicaciones").doc('global').collection("cont");
 
 export default function HomePage() {
